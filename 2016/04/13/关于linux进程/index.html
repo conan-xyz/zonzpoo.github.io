@@ -59,22 +59,16 @@
 
 
 
-<meta name="description" content="前言在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。
-一、关于Linux进程
-1，init是内核开启之后启动的第一个用户级进程,用来产生所有其他进程的程序,进程号为12，进程由内核调度,进程意识">
+<meta name="description" content="前言在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于linux进程">
 <meta property="og:url" content="http://yoursite.com/2016/04/13/关于linux进程/index.html">
 <meta property="og:site_name" content="Conan_的盗梦空间">
-<meta property="og:description" content="前言在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。
-一、关于Linux进程
-1，init是内核开启之后启动的第一个用户级进程,用来产生所有其他进程的程序,进程号为12，进程由内核调度,进程意识">
-<meta property="og:updated_time" content="2016-04-13T06:24:36.000Z">
+<meta property="og:description" content="前言在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。">
+<meta property="og:updated_time" content="2016-04-14T07:07:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于linux进程">
-<meta name="twitter:description" content="前言在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。
-一、关于Linux进程
-1，init是内核开启之后启动的第一个用户级进程,用来产生所有其他进程的程序,进程号为12，进程由内核调度,进程意识">
+<meta name="twitter:description" content="前言在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。">
 
 
 
@@ -317,10 +311,10 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。</p>
+<a id="more"></a>
 <h2 id="一、关于Linux进程"><a href="#一、关于Linux进程" class="headerlink" title="一、关于Linux进程"></a>一、关于Linux进程</h2><blockquote>
 <p>1，init是内核开启之后启动的第一个用户级进程,用来产生所有其他进程的程序,进程号为1<br>2，进程由内核调度,进程意识不到其他进程的存在,父进程要终止子进程需要向内核申请。<br>3，内核通过双向循环链表找到每个进程的数据结构(task_struct:（进程号,进程名,进程的父进程,进程分配的内存地址,进程使用的cpu信息等)，进而追踪所有的进程<br>4，双向循环链表:每个数据结构尾部有段空间存储了下一个数据结构的位置信息,首部存储了上一个数据结构的位置信息<br>5，和进程相关的信息一般映射至/proc目录下,作为伪文件系统<br>6，由于线程是内核库支持的编程模型实现的,所以linux不属于真正意义上的线程操作系统。</p>
 </blockquote>
-<a id="more"></a>
 <h2 id="二、Linux进程管理工具"><a href="#二、Linux进程管理工具" class="headerlink" title="二、Linux进程管理工具"></a>二、Linux进程管理工具</h2><h4 id="1，top"><a href="#1，top" class="headerlink" title="1，top"></a>1，<strong>top</strong></h4><p>常用选项：</p>
 <blockquote>
 <p> -d #： 指定刷新时间间隔<br> -b：以批次显示top的刷新<br> -n #：指定显示的次数<br> 注意：-b -n # 显示批次刷新次数</p>

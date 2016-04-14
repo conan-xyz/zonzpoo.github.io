@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-14T07:03:04.000Z</updated>
+  <updated>2016-04-14T07:07:33.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://yoursite.com/2016/04/14/lvs%E7%AE%80%E4%BB%8B/"/>
     <id>http://yoursite.com/2016/04/14/lvs简介/</id>
     <published>2016-04-14T05:10:28.000Z</published>
-    <updated>2016-04-14T07:03:04.000Z</updated>
+    <updated>2016-04-14T07:07:33.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;一、关于lvs-四层路由&quot;&gt;&lt;a href=&quot;#一、关于lvs-四层路由&quot; class=&quot;headerlink&quot; title=&quot;一、关于lvs(四层路由)&quot;&gt;&lt;/a&gt;一、关于lvs(四层路由)&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用&lt;br&gt;2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则&lt;br&gt;3，ipvs工作在netfilter框架上，根据目标请求的套接字上(包括端口的协议TCP/UDP)的转发&lt;br&gt;4，lvs仅依赖于ip,port等做判断，无法识别应用层内容&lt;br&gt;5，请求到达用户空间，每个请求的连接需要维持套接字文件，所以(haproxy，nginx)并发转发请求受到套件字文件个数的限定(65535)，而lvs不依赖套接字，所以获得更好的并发转发机制&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -68,7 +69,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;br&gt;
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;/p&gt;
     
     </summary>
     
@@ -84,13 +85,13 @@
     <link href="http://yoursite.com/2016/04/13/%E5%85%B3%E4%BA%8Elinux%E8%BF%9B%E7%A8%8B/"/>
     <id>http://yoursite.com/2016/04/13/关于linux进程/</id>
     <published>2016-04-13T05:58:59.000Z</published>
-    <updated>2016-04-13T06:24:36.000Z</updated>
+    <updated>2016-04-14T07:07:54.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;一、关于Linux进程&quot;&gt;&lt;a href=&quot;#一、关于Linux进程&quot; class=&quot;headerlink&quot; title=&quot;一、关于Linux进程&quot;&gt;&lt;/a&gt;一、关于Linux进程&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;1，init是内核开启之后启动的第一个用户级进程,用来产生所有其他进程的程序,进程号为1&lt;br&gt;2，进程由内核调度,进程意识不到其他进程的存在,父进程要终止子进程需要向内核申请。&lt;br&gt;3，内核通过双向循环链表找到每个进程的数据结构(task_struct:（进程号,进程名,进程的父进程,进程分配的内存地址,进程使用的cpu信息等)，进而追踪所有的进程&lt;br&gt;4，双向循环链表:每个数据结构尾部有段空间存储了下一个数据结构的位置信息,首部存储了上一个数据结构的位置信息&lt;br&gt;5，和进程相关的信息一般映射至/proc目录下,作为伪文件系统&lt;br&gt;6，由于线程是内核库支持的编程模型实现的,所以linux不属于真正意义上的线程操作系统。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;二、Linux进程管理工具&quot;&gt;&lt;a href=&quot;#二、Linux进程管理工具&quot; class=&quot;headerlink&quot; title=&quot;二、Linux进程管理工具&quot;&gt;&lt;/a&gt;二、Linux进程管理工具&lt;/h2&gt;&lt;h4 id=&quot;1，top&quot;&gt;&lt;a href=&quot;#1，top&quot; class=&quot;headerlink&quot; title=&quot;1，top&quot;&gt;&lt;/a&gt;1，&lt;strong&gt;top&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;常用选项：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt; -d #： 指定刷新时间间隔&lt;br&gt; -b：以批次显示top的刷新&lt;br&gt; -n #：指定显示的次数&lt;br&gt; 注意：-b -n # 显示批次刷新次数&lt;/p&gt;
@@ -146,9 +147,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。&lt;/p&gt;
-&lt;h2 id=&quot;一、关于Linux进程&quot;&gt;&lt;a href=&quot;#一、关于Linux进程&quot; class=&quot;headerlink&quot; title=&quot;一、关于Linux进程&quot;&gt;&lt;/a&gt;一、关于Linux进程&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;1，init是内核开启之后启动的第一个用户级进程,用来产生所有其他进程的程序,进程号为1&lt;br&gt;2，进程由内核调度,进程意识不到其他进程的存在,父进程要终止子进程需要向内核申请。&lt;br&gt;3，内核通过双向循环链表找到每个进程的数据结构(task_struct:（进程号,进程名,进程的父进程,进程分配的内存地址,进程使用的cpu信息等)，进而追踪所有的进程&lt;br&gt;4，双向循环链表:每个数据结构尾部有段空间存储了下一个数据结构的位置信息,首部存储了上一个数据结构的位置信息&lt;br&gt;5，和进程相关的信息一般映射至/proc目录下,作为伪文件系统&lt;br&gt;6，由于线程是内核库支持的编程模型实现的,所以linux不属于真正意义上的线程操作系统。&lt;/p&gt;
-&lt;/blockquote&gt;
     
     </summary>
     
@@ -164,9 +162,10 @@
     <link href="http://yoursite.com/2016/04/06/%E5%85%B3%E4%BA%8ELinux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
     <id>http://yoursite.com/2016/04/06/关于Linux文件系统/</id>
     <published>2016-04-06T13:03:32.000Z</published>
-    <updated>2016-04-14T07:01:07.000Z</updated>
+    <updated>2016-04-14T07:08:09.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;一、MBR：主引导记录&quot;&gt;&lt;a href=&quot;#一、MBR：主引导记录&quot; class=&quot;headerlink&quot; title=&quot;一、MBR：主引导记录&quot;&gt;&lt;/a&gt;一、MBR：主引导记录&lt;/h2&gt;&lt;p&gt;分区信息放在主引导记录中，为了让操作系统能识别分区&lt;br&gt;MBR(512bytes):&lt;br&gt;1，bootloader(引导加载器)：446bytes&lt;br&gt;2，fat(文件系统分配表)：64bytes(16bytes一个分区，共4个分区)&lt;br&gt;3，5A(MBR有效性标记)：2bytes&lt;br&gt;&lt;strong&gt;注：3个主分区，1扩展分区：引用额外的分区表–划分为逻辑分区&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&quot;二、文件系统&quot;&gt;&lt;a href=&quot;#二、文件系统&quot; class=&quot;headerlink&quot; title=&quot;二、文件系统&quot;&gt;&lt;/a&gt;二、文件系统&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;特性&lt;/strong&gt;:&lt;br&gt;文件系统通常将权限和属性放置于inode中,实际数据则放到data block中,还有一个超级块会记录整个文件系统的整体信息,包括inode和block的总量,使用量和剩余量&lt;/p&gt;
 &lt;blockquote&gt;
@@ -221,7 +220,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。&lt;br&gt;
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。&lt;/p&gt;
     
     </summary>
     

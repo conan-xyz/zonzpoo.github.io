@@ -67,7 +67,7 @@
 <meta property="og:description" content="前言LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样">
 <meta property="og:image" content="http://yoursite.com/images/lvs-nat.png">
 <meta property="og:image" content="http://yoursite.com/images/lvs-dr.png">
-<meta property="og:updated_time" content="2016-04-14T07:03:04.000Z">
+<meta property="og:updated_time" content="2016-04-14T07:07:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lvs简介">
 <meta name="twitter:description" content="前言LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样">
@@ -313,7 +313,8 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样<br><a id="more"></a></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样</p>
+<a id="more"></a>
 <h2 id="一、关于lvs-四层路由"><a href="#一、关于lvs-四层路由" class="headerlink" title="一、关于lvs(四层路由)"></a>一、关于lvs(四层路由)</h2><blockquote>
 <p>1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用<br>2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则<br>3，ipvs工作在netfilter框架上，根据目标请求的套接字上(包括端口的协议TCP/UDP)的转发<br>4，lvs仅依赖于ip,port等做判断，无法识别应用层内容<br>5，请求到达用户空间，每个请求的连接需要维持套接字文件，所以(haproxy，nginx)并发转发请求受到套件字文件个数的限定(65535)，而lvs不依赖套接字，所以获得更好的并发转发机制</p>
 </blockquote>
