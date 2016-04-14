@@ -67,7 +67,7 @@
 <meta property="og:description" content="前言LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样">
 <meta property="og:image" content="http://yoursite.com/images/lvs-nat.png">
 <meta property="og:image" content="http://yoursite.com/images/lvs-dr.png">
-<meta property="og:updated_time" content="2016-04-14T07:07:33.000Z">
+<meta property="og:updated_time" content="2016-04-14T10:44:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lvs简介">
 <meta name="twitter:description" content="前言LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样">
@@ -315,15 +315,15 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样</p>
 <a id="more"></a>
-<h2 id="一、关于lvs-四层路由"><a href="#一、关于lvs-四层路由" class="headerlink" title="一、关于lvs(四层路由)"></a>一、关于lvs(四层路由)</h2><blockquote>
+<h2 id="关于lvs-四层路由"><a href="#关于lvs-四层路由" class="headerlink" title="关于lvs(四层路由)"></a>关于lvs(四层路由)</h2><blockquote>
 <p>1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用<br>2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则<br>3，ipvs工作在netfilter框架上，根据目标请求的套接字上(包括端口的协议TCP/UDP)的转发<br>4，lvs仅依赖于ip,port等做判断，无法识别应用层内容<br>5，请求到达用户空间，每个请求的连接需要维持套接字文件，所以(haproxy，nginx)并发转发请求受到套件字文件个数的限定(65535)，而lvs不依赖套接字，所以获得更好的并发转发机制</p>
 </blockquote>
-<h2 id="二、lvs工作机制"><a href="#二、lvs工作机制" class="headerlink" title="二、lvs工作机制"></a>二、lvs工作机制</h2><p>前端调度器：Director<br>后端服务器：Real Server<br>VIP: Director接受用户请求的IP地址<br>DIP: Director转发报文给Real Server的IP地址<br>RIP: Real Server的IP地址<br>CIP: 客户端的IP地址<br>请求报文经过的IP：<em>CIP –&gt; VIP –&gt; DIP –&gt; RIP</em></p>
-<h2 id="三、lvs工作类型"><a href="#三、lvs工作类型" class="headerlink" title="三、lvs工作类型"></a>三、lvs工作类型</h2><h4 id="1，NAT模型"><a href="#1，NAT模型" class="headerlink" title="1，NAT模型"></a>1，NAT模型</h4><p><img src="/images/lvs-nat.png" alt="lvs-nat"></p>
+<h2 id="lvs工作机制"><a href="#lvs工作机制" class="headerlink" title="lvs工作机制"></a>lvs工作机制</h2><p>前端调度器：Director<br>后端服务器：Real Server<br>VIP: Director接受用户请求的IP地址<br>DIP: Director转发报文给Real Server的IP地址<br>RIP: Real Server的IP地址<br>CIP: 客户端的IP地址<br>请求报文经过的IP：<em>CIP –&gt; VIP –&gt; DIP –&gt; RIP</em></p>
+<h2 id="lvs工作类型"><a href="#lvs工作类型" class="headerlink" title="lvs工作类型"></a>lvs工作类型</h2><h4 id="NAT模型"><a href="#NAT模型" class="headerlink" title="NAT模型"></a>NAT模型</h4><p><img src="/images/lvs-nat.png" alt="lvs-nat"></p>
 <h4 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h4><blockquote>
 <p>1，RS(real server)应该使用私有地址<br>2，RS的网关的必须指向DIP,RIP和DIP必须在同一网段内<br>3，<strong>请求和响应的报文都经过Director</strong>(在高负载场景中Director会成为系统性能瓶颈）<br>4，支持端口映射<br>5，RS可以使用任意支持集群服务的OS</p>
 </blockquote>
-<h4 id="2，DR模型"><a href="#2，DR模型" class="headerlink" title="2，DR模型"></a>2，DR模型</h4><p><img src="/images/lvs-dr.png" alt="lvs-dr"></p>
+<h4 id="DR模型"><a href="#DR模型" class="headerlink" title="DR模型"></a>DR模型</h4><p><img src="/images/lvs-dr.png" alt="lvs-dr"></p>
 <ul>
 <li>实线是请求过程，虚线是响应过程</li>
 <li>黑色表示RIP，DIP，VIP都是共网地址</li>
@@ -334,9 +334,9 @@
 <p> <strong>修改Linux内核参数，将RS上的VIP配置为lo接口的别名，限制Linux仅对对应接口的ARP请求做响应</strong></p>
 </blockquote>
 <h4 id="特性：-1"><a href="#特性：-1" class="headerlink" title="特性："></a>特性：</h4><blockquote>
-<p>1，RS可以使用私有地址；但也可以使用公网地址，此时可以直接通过互联网连入RS以实现配置、监控等<br>2，RS的网关一定不能指向DIP<br>3，RS跟Dirctory要在同一物理网络内(不能由路由器分隔)<br>4，请求报文经过Directory，但响应报文一定不经过Director<br>5，不支持端口映射<br>6，RS可以使用大多数的操作系统<br>7，<strong>Dirctory上为了便于VIP流动性(keepalived高可用)，Directory应该还有一个自己的外网地址</strong></p>
+<p>1，RS可以使用私有地址；但也可以使用公网地址，此时可以直接通过互联网连入RS以实现配监控等<br>2，RS的网关一定不能指向DIP<br>3，RS跟Dirctory要在同一物理网络内(不能由路由器分隔)<br>4，请求报文经过Directory，但响应报文一定不经过Director<br>5，不支持端口映射<br>6，RS可以使用大多数的操作系统<br>7，<strong>Dirctory上为了便于VIP流动性(keepalived高可用)，Directory应该还有一个自己的外网地址</strong></p>
 </blockquote>
-<h2 id="四、lvs调度算法"><a href="#四、lvs调度算法" class="headerlink" title="四、lvs调度算法"></a>四、lvs调度算法</h2><p><strong>静态方法：仅根据算法本身进行调度</strong></p>
+<h2 id="lvs调度算法"><a href="#lvs调度算法" class="headerlink" title="lvs调度算法"></a>lvs调度算法</h2><p><strong>静态方法：仅根据算法本身进行调度</strong></p>
 <blockquote>
 <ul>
 <li>rr: Round Robin</li>
@@ -512,7 +512,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、关于lvs-四层路由"><span class="nav-number">2.</span> <span class="nav-text">一、关于lvs(四层路由)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、lvs工作机制"><span class="nav-number">3.</span> <span class="nav-text">二、lvs工作机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、lvs工作类型"><span class="nav-number">4.</span> <span class="nav-text">三、lvs工作类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，NAT模型"><span class="nav-number">4.0.1.</span> <span class="nav-text">1，NAT模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特性："><span class="nav-number">4.0.2.</span> <span class="nav-text">特性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2，DR模型"><span class="nav-number">4.0.3.</span> <span class="nav-text">2，DR模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特性：-1"><span class="nav-number">4.0.4.</span> <span class="nav-text">特性：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、lvs调度算法"><span class="nav-number">5.</span> <span class="nav-text">四、lvs调度算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于lvs-四层路由"><span class="nav-number">2.</span> <span class="nav-text">关于lvs(四层路由)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lvs工作机制"><span class="nav-number">3.</span> <span class="nav-text">lvs工作机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lvs工作类型"><span class="nav-number">4.</span> <span class="nav-text">lvs工作类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NAT模型"><span class="nav-number">4.0.1.</span> <span class="nav-text">NAT模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特性："><span class="nav-number">4.0.2.</span> <span class="nav-text">特性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DR模型"><span class="nav-number">4.0.3.</span> <span class="nav-text">DR模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特性：-1"><span class="nav-number">4.0.4.</span> <span class="nav-text">特性：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lvs调度算法"><span class="nav-number">5.</span> <span class="nav-text">lvs调度算法</span></a></li></ol></div>
             
           </div>
         </section>
