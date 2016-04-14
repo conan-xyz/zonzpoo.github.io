@@ -1,0 +1,710 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="lvs," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Conan_的盗梦空间" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="前言LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样
+一、关于lvs(四层路由)
+1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则3，ipvs工作在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lvs简介">
+<meta property="og:url" content="http://yoursite.com/2016/04/14/lvs简介/index.html">
+<meta property="og:site_name" content="Conan_的盗梦空间">
+<meta property="og:description" content="前言LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样
+一、关于lvs(四层路由)
+1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则3，ipvs工作在">
+<meta property="og:image" content="http://yoursite.com/images/lvs-nat.png">
+<meta property="og:image" content="http://yoursite.com/images/lvs-dr.png">
+<meta property="og:updated_time" content="2016-04-14T05:31:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="lvs简介">
+<meta name="twitter:description" content="前言LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样
+一、关于lvs(四层路由)
+1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则3，ipvs工作在">
+<meta name="twitter:image" content="http://yoursite.com/images/lvs-nat.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> lvs简介 | Conan_的盗梦空间 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Conan_的盗梦空间</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                lvs简介
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-14T13:10:28+08:00" content="2016-04-14">
+              2016-04-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/14/lvs简介/" class="leancloud_visitors" data-flag-title="lvs简介">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样</p>
+<h2 id="一、关于lvs-四层路由"><a href="#一、关于lvs-四层路由" class="headerlink" title="一、关于lvs(四层路由)"></a>一、关于lvs(四层路由)</h2><blockquote>
+<p>1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用<br>2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则<br>3，ipvs工作在netfilter框架上，根据目标请求的套接字上(包括端口的协议TCP/UDP)的转发<br>4，lvs仅依赖于ip,port等做判断，无法识别应用层内容<br>5，请求到达用户空间，每个请求的连接需要维持套接字文件，所以(haproxy，nginx)并发转发请求受到套件字文件个数的限定(65535)，而lvs不依赖套接字，所以获得更好的并发转发机制<br><a id="more"></a></p>
+</blockquote>
+<h2 id="二、lvs工作机制"><a href="#二、lvs工作机制" class="headerlink" title="二、lvs工作机制"></a>二、lvs工作机制</h2><p>前端调度器：Director<br>后端服务器：Real Server<br>VIP: Director接受用户请求的IP地址<br>DIP: Director转发报文给Real Server的IP地址<br>RIP: Real Server的IP地址<br>CIP: 客户端的IP地址<br>请求报文经过的IP：<em>CIP –&gt; VIP –&gt; DIP –&gt; RIP</em></p>
+<h2 id="三、lvs工作类型"><a href="#三、lvs工作类型" class="headerlink" title="三、lvs工作类型"></a>三、lvs工作类型</h2><h4 id="1，NAT模型"><a href="#1，NAT模型" class="headerlink" title="1，NAT模型"></a>1，NAT模型</h4><p><img src="/images/lvs-nat.png" alt="lvs-nat"></p>
+<h4 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h4><blockquote>
+<p>1，RS(real server)应该使用私有地址<br>2，RS的网关的必须指向DIP,RIP和DIP必须在同一网段内<br>3，<strong>请求和响应的报文都经过Director</strong>(在高负载场景中Director会成为系统性能瓶颈）<br>4，支持端口映射<br>5，RS可以使用任意支持集群服务的OS</p>
+</blockquote>
+<h4 id="2，DR模型"><a href="#2，DR模型" class="headerlink" title="2，DR模型"></a>2，DR模型</h4><p><img src="/images/lvs-dr.png" alt="lvs-dr"></p>
+<ul>
+<li>实线是请求过程，虚线是响应过程</li>
+<li>黑色表示RIP，DIP，VIP都是共网地址</li>
+<li>红色表示DIP，VIP是私有地址且在同一个网段</li>
+</ul>
+<p><strong>此模型下Director发给RS时没有改变目标IP</strong><br>需要解决的问题：<em>让前端路由将请求发往VIP时，只能是Dirctor上的VIP</em></p>
+<blockquote>
+<p> <strong>修改Linux内核参数，将RS上的VIP配置为lo接口的别名，限制Linux仅对对应接口的ARP请求做响应</strong></p>
+</blockquote>
+<h4 id="特性：-1"><a href="#特性：-1" class="headerlink" title="特性："></a>特性：</h4><blockquote>
+<p>1，RS可以使用私有地址；但也可以使用公网地址，此时可以直接通过互联网连入RS以实现配置、监控等<br>2，RS的网关一定不能指向DIP<br>3，RS跟Dirctory要在同一物理网络内(不能由路由器分隔)<br>4，请求报文经过Directory，但响应报文一定不经过Director<br>5，不支持端口映射<br>6，RS可以使用大多数的操作系统<br>7，<strong>Dirctory上为了便于VIP流动性(keepalived高可用)，Directory应该还有一个自己的外网地址</strong></p>
+</blockquote>
+<h2 id="四、lvs调度算法"><a href="#四、lvs调度算法" class="headerlink" title="四、lvs调度算法"></a>四、lvs调度算法</h2><p><strong>静态方法：仅根据算法本身进行调度</strong></p>
+<blockquote>
+<ul>
+<li>rr: Round Robin</li>
+<li>wrr: Weighted RR</li>
+<li>sh: source hashing</li>
+<li>dh: destination hashing</li>
+</ul>
+</blockquote>
+<p><strong>动态方法：根据算法及RS当前的负载状况</strong></p>
+<blockquote>
+<ul>
+<li>lc: Least Connection Overhead<br>[当前负载]=Active*256+Inactive  结果中，最小者胜出；</li>
+<li>wlc: Weighted LC<br>[考虑权重]Overhead=(Active*256+Inactive)/weight</li>
+<li>sed: Shortest Expect Delay [最小期望延迟]Overhead=(Active+1)*256/weight</li>
+<li>nq: Nerver Queue</li>
+<li>lblc: Locality-based Least Connection  &lt;==&gt; dh+lc</li>
+<li>lblcr: Replicated and Locality-based Least Connection</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/lvs/" rel="tag">#lvs</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/13/关于linux进程/" rel="next" title="关于linux进程">
+                <i class="fa fa-chevron-left"></i> 关于linux进程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/conan.png"
+               alt="Conan_" />
+          <p class="site-author-name" itemprop="name">Conan_</p>
+          <p class="site-description motion-element" itemprop="description">devops之路</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、关于lvs-四层路由"><span class="nav-number">2.</span> <span class="nav-text">一、关于lvs(四层路由)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、lvs工作机制"><span class="nav-number">3.</span> <span class="nav-text">二、lvs工作机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、lvs工作类型"><span class="nav-number">4.</span> <span class="nav-text">三、lvs工作类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，NAT模型"><span class="nav-number">4.0.1.</span> <span class="nav-text">1，NAT模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特性："><span class="nav-number">4.0.2.</span> <span class="nav-text">特性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2，DR模型"><span class="nav-number">4.0.3.</span> <span class="nav-text">2，DR模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特性：-1"><span class="nav-number">4.0.4.</span> <span class="nav-text">特性：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、lvs调度算法"><span class="nav-number">5.</span> <span class="nav-text">四、lvs调度算法</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Conan_</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/vendors/jquery-scrollintoview/jquery.scrollintoview.min.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("3mBmLn30Lw4qzMgGzU5IFLap-gzGzoHsz", "TM9gEiTnvVR8gKYMWmtv2r04");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

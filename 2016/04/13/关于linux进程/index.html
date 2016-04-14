@@ -1,0 +1,724 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="进程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Conan_的盗梦空间" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="前言在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。
+一、关于Linux进程
+1，init是内核开启之后启动的第一个用户级进程,用来产生所有其他进程的程序,进程号为12，进程由内核调度,进程意识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于linux进程">
+<meta property="og:url" content="http://yoursite.com/2016/04/13/关于linux进程/index.html">
+<meta property="og:site_name" content="Conan_的盗梦空间">
+<meta property="og:description" content="前言在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。
+一、关于Linux进程
+1，init是内核开启之后启动的第一个用户级进程,用来产生所有其他进程的程序,进程号为12，进程由内核调度,进程意识">
+<meta property="og:updated_time" content="2016-04-13T06:24:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于linux进程">
+<meta name="twitter:description" content="前言在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。
+一、关于Linux进程
+1，init是内核开启之后启动的第一个用户级进程,用来产生所有其他进程的程序,进程号为12，进程由内核调度,进程意识">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 关于linux进程 | Conan_的盗梦空间 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Conan_的盗梦空间</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于linux进程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-13T13:58:59+08:00" content="2016-04-13">
+              2016-04-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/13/关于linux进程/" class="leancloud_visitors" data-flag-title="关于linux进程">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。</p>
+<h2 id="一、关于Linux进程"><a href="#一、关于Linux进程" class="headerlink" title="一、关于Linux进程"></a>一、关于Linux进程</h2><blockquote>
+<p>1，init是内核开启之后启动的第一个用户级进程,用来产生所有其他进程的程序,进程号为1<br>2，进程由内核调度,进程意识不到其他进程的存在,父进程要终止子进程需要向内核申请。<br>3，内核通过双向循环链表找到每个进程的数据结构(task_struct:（进程号,进程名,进程的父进程,进程分配的内存地址,进程使用的cpu信息等)，进而追踪所有的进程<br>4，双向循环链表:每个数据结构尾部有段空间存储了下一个数据结构的位置信息,首部存储了上一个数据结构的位置信息<br>5，和进程相关的信息一般映射至/proc目录下,作为伪文件系统<br>6，由于线程是内核库支持的编程模型实现的,所以linux不属于真正意义上的线程操作系统。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="二、Linux进程管理工具"><a href="#二、Linux进程管理工具" class="headerlink" title="二、Linux进程管理工具"></a>二、Linux进程管理工具</h2><h4 id="1，top"><a href="#1，top" class="headerlink" title="1，top"></a>1，<strong>top</strong></h4><p>常用选项：</p>
+<blockquote>
+<p> -d #： 指定刷新时间间隔<br> -b：以批次显示top的刷新<br> -n #：指定显示的次数<br> 注意：-b -n # 显示批次刷新次数</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">top - 22:43:21 up 24 days, 13:17,  1 user,  load average: 0.00, 0.03, 0.05</span><br><span class="line">Tasks: 159 total,   2 running, 157 sleeping,   0 stopped,   0 zombie</span><br><span class="line">%Cpu(s):  0.3 us,  0.3 sy,  0.0 ni, 99.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span><br><span class="line">KiB Mem:   2048464 total,  1268048 used,   780416 free,    71160 buffers</span><br><span class="line">KiB Swap:  4194300 total,    71864 used,  4122436 free.   245404 cached Mem</span><br><span class="line"></span><br><span class="line">  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND                                                                          </span><br><span class="line"> 2305 root      20   0  463496   8448   1672 S  0.3  0.4  22:22.89 AliYunDunUpdate                                                                  </span><br><span class="line"> 2403 root      20   0  141932   5748   3564 S  0.3  0.3  56:54.12 AliYunDun                                                                        </span><br><span class="line">    1 root      20   0   33472   2460   1128 S  0.0  0.1   0:01.75 init</span><br></pre></td></tr></table></figure>
+<p>字段表示含义：</p>
+<blockquote>
+<p> 2，load average  平均1分钟/5分钟/15分钟CPU负载<br> 3，total|running|sleeping|stopped|zombie 总进程数|运行|休眠|停止|僵死<br> 4，us:用户空间占用cpu百分比<br> 5，sy:系统占用cpu百分比<br> 6，ni:nice值调整过的进程占用cpu百分比<br> 7，id:空闲百分比<br> 8，wa:等待I/O完成占用百分比<br> 9，hi|si:硬件|软件中断占用百分比<br> 10，st:被偷走的所占用百分比<br> 11，Mem|Swap后面的值表示总共，已用，空闲，缓冲</p>
+</blockquote>
+<p>操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">M: 按内存占用百分比大小排序</span><br><span class="line">P：按CPU占用百分比大小排序，默认；</span><br><span class="line">T：按累积占用CPU时长大小排序</span><br><span class="line">l: 是否显示负载信息</span><br><span class="line">t: 是否显示CPU和进程的统计信息</span><br><span class="line">m: 是否显示内存摘要信息</span><br><span class="line">q: 退出	</span><br><span class="line">k: kill，终止一个进程   9/15</span><br><span class="line">s: 改变top刷新时间间隔</span><br></pre></td></tr></table></figure></p>
+<h4 id="2，vmstat"><a href="#2，vmstat" class="headerlink" title="2，vmstat"></a>2，<strong>vmstat</strong></h4><p>常用选项：</p>
+<blockquote>
+<p>-s：显示内存统计数据<br>1 3：表示1秒刷新一次，显示三次</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----</span><br><span class="line"> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st</span><br><span class="line"> 0  0  71860 778976  72356 245420    0    0     3    45    1   16  1  1 98  0  0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>r：运行或等待CPU时间片的进程的个数<br>b：被阻塞(通常为等待I/O完成)的进程队列的个数<br>swpd：从物理内存交换至swap中的数据量<br>free：未使用物理内存大小<br>buffer：buffer空间大小，通常与缓存写操作相关<br>cache：cache空间大小，通常与缓存读操作相关<br>si: swap in，数据进入swap中的数据量，通常是速率[kb/s]<br>so: swap out，数据离开swap的数据量<br>bi: block in，从块设备读入的数据量，通常是速率[kb/s]<br>bo: block out，保存至块设备中的数据量，通常是速率[kb/s]<br>in: 中断发生速率，每秒的中断数<br>cs: context switch(上下文切换)，进程切换，通常为每秒钟切换的次数</p>
+</blockquote>
+<h4 id="3，ps"><a href="#3，ps" class="headerlink" title="3，ps"></a>3，<strong>ps</strong></h4><p>STAT 进程状态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">R: 运行或可运行</span><br><span class="line">S: 可中断的睡眠状态</span><br><span class="line">D: 不可中断的睡眠状态</span><br><span class="line">T：停止 </span><br><span class="line">Z：僵死</span><br><span class="line">s：会话领导者(session leader)</span><br><span class="line">+：前台进程</span><br><span class="line">l：多线程进程</span><br><span class="line">N：低优先级进程</span><br><span class="line">&lt;： 高优先级进程</span><br><span class="line">[]：表示内核线程</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>-a | x：所有和终端相关|无关的进程<br>-u：以用户为中心显示进程相关信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~$ ps aux</span><br><span class="line">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span><br><span class="line">root         1  0.0  0.1  33472  2460 ?        Ss   Mar14   0:01 /sbin/init</span><br></pre></td></tr></table></figure>
+<p><em>%cpu：cputime/realtime</em><br><em>%MEM：占用内存/实际内存</em><br><em>VSZ: 线性地址空间大小(Virutal memory SiZe)</em><br><em>RSS: 非交互物理内存空间(常驻内存集)</em><br><em>TTY: ‘?’表示与终端无关的进程</em></p>
+<blockquote>
+<p>-e：显示所有进程<br>-f：显示完整格式列表</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ps -ef</span><br><span class="line">UID        PID  PPID  C STIME TTY          TIME CMD</span><br><span class="line">root         1     0  0 Mar14 ?        00:00:01 /sbin/init</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>-F：显示额外信息<br>-H：显示进程的层次信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ps -eFH</span><br><span class="line">UID        PID  PPID  C    SZ   RSS PSR STIME TTY          TIME CMD</span><br><span class="line">root         2     0  0     0     0   0 Mar14 ?        00:00:00 [kthreadd]</span><br><span class="line">root         3     2  0     0     0   0 Mar14 ?        00:00:11   [ksoftirqd/0]</span><br><span class="line">root         5     2  0     0     0   0 Mar14 ?        00:00:00   [kworker/0:0H]</span><br></pre></td></tr></table></figure>
+<p><em>PSR：表示运行在哪个cpu上</em></p>
+<blockquote>
+<p>-o：表示自定义要显示的信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ps axo pid,command,ni</span><br><span class="line">  PID COMMAND                      NI</span><br><span class="line">    1 /sbin/init                    0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rtprio: 实时优先级</span><br><span class="line">ni：nice值</span><br><span class="line">pri：优先级</span><br><span class="line">psr：运行的cpu</span><br></pre></td></tr></table></figure>
+<h4 id="4，pmap：显示一个进程占用的内存"><a href="#4，pmap：显示一个进程占用的内存" class="headerlink" title="4，pmap：显示一个进程占用的内存"></a>4，<strong>pmap</strong>：显示一个进程占用的内存</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pmap -x 7066</span><br><span class="line">Address           Kbytes     RSS   Dirty Mode  Mapping</span><br><span class="line">0000000000400000     772     464       0 r-x-- nginx</span><br><span class="line">00000000006c0000       4       4       4 r---- nginx</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> Address：起始地址<br> Kbytes：占用内存的大小<br> RSS：常驻内存集<br> Dirty：脏页(修改过当尚未同步到磁盘上的数据大小)<br> MODE：读-写-执行-共享-私有</p>
+</blockquote>
+<h4 id="5，nice：手动调整进程优先级，数值越小，优先级越高"><a href="#5，nice：手动调整进程优先级，数值越小，优先级越高" class="headerlink" title="5，nice：手动调整进程优先级，数值越小，优先级越高"></a>5，<strong>nice</strong>：手动调整进程优先级，数值越小，优先级越高</h4><p>进程的nice值为-20~19之间，默认nice为0<br><strong>注：非管理员用户只能调大nice值</strong><br>对于尚未启动的程序：nice -n # COMMAND<br>对于运行中的进程：renice # PID</p>
+<h2 id="三、Linux进程间通信-IPC"><a href="#三、Linux进程间通信-IPC" class="headerlink" title="三、Linux进程间通信(IPC)"></a>三、Linux进程间通信(IPC)</h2><h4 id="1，kill：用于向其他进程发送消息"><a href="#1，kill：用于向其他进程发送消息" class="headerlink" title="1，kill：用于向其他进程发送消息"></a>1，<strong>kill</strong>：用于向其他进程发送消息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-l| -SIGNAL：显示可以接受的信号</span><br></pre></td></tr></table></figure>
+<p>常用的信号：(可以写出1|SIGHUP|HUP)</p>
+<blockquote>
+<p> 1）SIGHUP：让程序重读配置文件，而不重启程序<br> 2）SIGINT：中断信号，相当于Ctrl+c即发送此信息<br> 9）SIGKILL：杀死进程<br> 15）SIGTERM：终止进程</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-stop-daemon --stop --signal HUP --quiet --pidfile /var/run/nginx.pid --name nginx</span><br></pre></td></tr></table></figure>
+<p>该命令会检查nginx进程是否存在，如果存在发送SIGHUP信号，让进程重读配置文件，成功返回0，如果进程不存在，该命令会退出并返回1</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/进程/" rel="tag">#进程</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/06/关于Linux文件系统/" rel="next" title="关于Linux文件系统">
+                <i class="fa fa-chevron-left"></i> 关于Linux文件系统
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/14/lvs简介/" rel="prev" title="lvs简介">
+                lvs简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/conan.png"
+               alt="Conan_" />
+          <p class="site-author-name" itemprop="name">Conan_</p>
+          <p class="site-description motion-element" itemprop="description">devops之路</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、关于Linux进程"><span class="nav-number">2.</span> <span class="nav-text">一、关于Linux进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Linux进程管理工具"><span class="nav-number">3.</span> <span class="nav-text">二、Linux进程管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，top"><span class="nav-number">3.0.1.</span> <span class="nav-text">1，top</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2，vmstat"><span class="nav-number">3.0.2.</span> <span class="nav-text">2，vmstat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3，ps"><span class="nav-number">3.0.3.</span> <span class="nav-text">3，ps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4，pmap：显示一个进程占用的内存"><span class="nav-number">3.0.4.</span> <span class="nav-text">4，pmap：显示一个进程占用的内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5，nice：手动调整进程优先级，数值越小，优先级越高"><span class="nav-number">3.0.5.</span> <span class="nav-text">5，nice：手动调整进程优先级，数值越小，优先级越高</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Linux进程间通信-IPC"><span class="nav-number">4.</span> <span class="nav-text">三、Linux进程间通信(IPC)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，kill：用于向其他进程发送消息"><span class="nav-number">4.0.1.</span> <span class="nav-text">1，kill：用于向其他进程发送消息</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Conan_</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/vendors/jquery-scrollintoview/jquery.scrollintoview.min.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("3mBmLn30Lw4qzMgGzU5IFLap-gzGzoHsz", "TM9gEiTnvVR8gKYMWmtv2r04");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
