@@ -94,6 +94,16 @@
 
 
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ab31944d33b258d42a263a7c78b303a3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
 
@@ -270,6 +280,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/14/lvs简介/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/lvs简介/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -390,6 +407,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/13/关于linux进程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/13/关于linux进程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -513,6 +537,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/06/关于Linux文件系统/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/06/关于Linux文件系统/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -541,8 +572,7 @@
 
       
         
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。</p>
-<h2 id="一、MBR：主引导记录"><a href="#一、MBR：主引导记录" class="headerlink" title="一、MBR：主引导记录"></a>一、MBR：主引导记录</h2><p>分区信息放在主引导记录中，为了让操作系统能识别分区<br>MBR(512bytes):<br>1，bootloader(引导加载器)：446bytes<br>2，fat(文件系统分配表)：64bytes(16bytes一个分区，共4个分区)<br>3，5A(MBR有效性标记)：2bytes<br><strong>注：3个主分区，1扩展分区：引用额外的分区表–划分为逻辑分区</strong></p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/06/关于Linux文件系统/#more" rel="contents">
               阅读全文 &raquo;
@@ -753,9 +783,28 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zonzpoo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+  
+
+
 
 
 

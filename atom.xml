@@ -166,11 +166,10 @@
     <link href="http://yoursite.com/2016/04/06/%E5%85%B3%E4%BA%8ELinux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
     <id>http://yoursite.com/2016/04/06/关于Linux文件系统/</id>
     <published>2016-04-06T13:03:32.000Z</published>
-    <updated>2016-04-13T06:24:51.000Z</updated>
+    <updated>2016-04-14T07:01:07.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。&lt;/p&gt;
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;一、MBR：主引导记录&quot;&gt;&lt;a href=&quot;#一、MBR：主引导记录&quot; class=&quot;headerlink&quot; title=&quot;一、MBR：主引导记录&quot;&gt;&lt;/a&gt;一、MBR：主引导记录&lt;/h2&gt;&lt;p&gt;分区信息放在主引导记录中，为了让操作系统能识别分区&lt;br&gt;MBR(512bytes):&lt;br&gt;1，bootloader(引导加载器)：446bytes&lt;br&gt;2，fat(文件系统分配表)：64bytes(16bytes一个分区，共4个分区)&lt;br&gt;3，5A(MBR有效性标记)：2bytes&lt;br&gt;&lt;strong&gt;注：3个主分区，1扩展分区：引用额外的分区表–划分为逻辑分区&lt;/strong&gt;&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;二、文件系统&quot;&gt;&lt;a href=&quot;#二、文件系统&quot; class=&quot;headerlink&quot; title=&quot;二、文件系统&quot;&gt;&lt;/a&gt;二、文件系统&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;特性&lt;/strong&gt;:&lt;br&gt;文件系统通常将权限和属性放置于inode中,实际数据则放到data block中,还有一个超级块会记录整个文件系统的整体信息,包括inode和block的总量,使用量和剩余量&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;super block：记录此文件系统的整体信息,inode和block的总量,使用量和剩余量和文件系统的格式和相关信息&lt;br&gt;inode：记录文件的属性,一个文件占用一个inode,同时记录此文件数据所在的block号码&lt;br&gt;block：实际记录文件内容,文件过大时,会占用多个block&lt;/p&gt;
@@ -224,8 +223,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。&lt;/p&gt;
-&lt;h2 id=&quot;一、MBR：主引导记录&quot;&gt;&lt;a href=&quot;#一、MBR：主引导记录&quot; class=&quot;headerlink&quot; title=&quot;一、MBR：主引导记录&quot;&gt;&lt;/a&gt;一、MBR：主引导记录&lt;/h2&gt;&lt;p&gt;分区信息放在主引导记录中，为了让操作系统能识别分区&lt;br&gt;MBR(512bytes):&lt;br&gt;1，bootloader(引导加载器)：446bytes&lt;br&gt;2，fat(文件系统分配表)：64bytes(16bytes一个分区，共4个分区)&lt;br&gt;3，5A(MBR有效性标记)：2bytes&lt;br&gt;&lt;strong&gt;注：3个主分区，1扩展分区：引用额外的分区表–划分为逻辑分区&lt;/strong&gt;&lt;/p&gt;
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。&lt;br&gt;
     
     </summary>
     
