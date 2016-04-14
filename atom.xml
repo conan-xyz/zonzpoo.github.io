@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-14T05:31:34.000Z</updated>
+  <updated>2016-04-14T07:03:04.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="http://yoursite.com/2016/04/14/lvs%E7%AE%80%E4%BB%8B/"/>
     <id>http://yoursite.com/2016/04/14/lvs简介/</id>
     <published>2016-04-14T05:10:28.000Z</published>
-    <updated>2016-04-14T05:31:34.000Z</updated>
+    <updated>2016-04-14T07:03:04.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;/p&gt;
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;一、关于lvs-四层路由&quot;&gt;&lt;a href=&quot;#一、关于lvs-四层路由&quot; class=&quot;headerlink&quot; title=&quot;一、关于lvs(四层路由)&quot;&gt;&lt;/a&gt;一、关于lvs(四层路由)&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用&lt;br&gt;2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则&lt;br&gt;3，ipvs工作在netfilter框架上，根据目标请求的套接字上(包括端口的协议TCP/UDP)的转发&lt;br&gt;4，lvs仅依赖于ip,port等做判断，无法识别应用层内容&lt;br&gt;5，请求到达用户空间，每个请求的连接需要维持套接字文件，所以(haproxy，nginx)并发转发请求受到套件字文件个数的限定(65535)，而lvs不依赖套接字，所以获得更好的并发转发机制&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用&lt;br&gt;2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则&lt;br&gt;3，ipvs工作在netfilter框架上，根据目标请求的套接字上(包括端口的协议TCP/UDP)的转发&lt;br&gt;4，lvs仅依赖于ip,port等做判断，无法识别应用层内容&lt;br&gt;5，请求到达用户空间，每个请求的连接需要维持套接字文件，所以(haproxy，nginx)并发转发请求受到套件字文件个数的限定(65535)，而lvs不依赖套接字，所以获得更好的并发转发机制&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;二、lvs工作机制&quot;&gt;&lt;a href=&quot;#二、lvs工作机制&quot; class=&quot;headerlink&quot; title=&quot;二、lvs工作机制&quot;&gt;&lt;/a&gt;二、lvs工作机制&lt;/h2&gt;&lt;p&gt;前端调度器：Director&lt;br&gt;后端服务器：Real Server&lt;br&gt;VIP: Director接受用户请求的IP地址&lt;br&gt;DIP: Director转发报文给Real Server的IP地址&lt;br&gt;RIP: Real Server的IP地址&lt;br&gt;CIP: 客户端的IP地址&lt;br&gt;请求报文经过的IP：&lt;em&gt;CIP –&amp;gt; VIP –&amp;gt; DIP –&amp;gt; RIP&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&quot;三、lvs工作类型&quot;&gt;&lt;a href=&quot;#三、lvs工作类型&quot; class=&quot;headerlink&quot; title=&quot;三、lvs工作类型&quot;&gt;&lt;/a&gt;三、lvs工作类型&lt;/h2&gt;&lt;h4 id=&quot;1，NAT模型&quot;&gt;&lt;a href=&quot;#1，NAT模型&quot; class=&quot;headerlink&quot; title=&quot;1，NAT模型&quot;&gt;&lt;/a&gt;1，NAT模型&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;/images/lvs-nat.png&quot; alt=&quot;lvs-nat&quot;&gt;&lt;/p&gt;
@@ -68,9 +68,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;/p&gt;
-&lt;h2 id=&quot;一、关于lvs-四层路由&quot;&gt;&lt;a href=&quot;#一、关于lvs-四层路由&quot; class=&quot;headerlink&quot; title=&quot;一、关于lvs(四层路由)&quot;&gt;&lt;/a&gt;一、关于lvs(四层路由)&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用&lt;br&gt;2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则&lt;br&gt;3，ipvs工作在netfilter框架上，根据目标请求的套接字上(包括端口的协议TCP/UDP)的转发&lt;br&gt;4，lvs仅依赖于ip,port等做判断，无法识别应用层内容&lt;br&gt;5，请求到达用户空间，每个请求的连接需要维持套接字文件，所以(haproxy，nginx)并发转发请求受到套件字文件个数的限定(65535)，而lvs不依赖套接字，所以获得更好的并发转发机制&lt;br&gt;
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;br&gt;
     
     </summary>
     
