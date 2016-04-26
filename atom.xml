@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Conan_的盗梦空间</title>
+  <title>Conan_の空间</title>
   
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-04-14T10:44:21.000Z</updated>
+  <updated>2016-04-26T05:44:32.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,46 +16,214 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>lvs简介</title>
+    <title>watchdog模块</title>
+    <link href="http://yoursite.com/2016/04/25/watchdog%E6%A8%A1%E5%9D%97/"/>
+    <id>http://yoursite.com/2016/04/25/watchdog模块/</id>
+    <published>2016-04-25T15:26:02.000Z</published>
+    <updated>2016-04-26T05:44:32.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;watchdog是python的第三方库,利用操作系统的API来监控目标目录或者文件的变化, 在linux系统下,借用了inotify机制&lt;br&gt;参照observers/__init__.py&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Class&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;Platforms&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;Note&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Inotify&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Linux 2.6.13+&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;inotify(7) based observer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FSEvents&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Mac OS X&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;FSEvents based observer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Kqueue&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Mac OS X and BSD with kqueue(2)&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;kqueue(2) based observer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;WinApi&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;MS Windows&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Windows API-based observer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Polling&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Any&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;fallback implementation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;watchdog以及需要用的模块介绍&quot;&gt;&lt;a href=&quot;#watchdog以及需要用的模块介绍&quot; class=&quot;headerlink&quot; title=&quot;watchdog以及需要用的模块介绍&quot;&gt;&lt;/a&gt;watchdog以及需要用的模块介绍&lt;/h2&gt;&lt;h3 id=&quot;打开文件操作&quot;&gt;&lt;a href=&quot;#打开文件操作&quot; class=&quot;headerlink&quot; title=&quot;打开文件操作&quot;&gt;&lt;/a&gt;打开文件操作&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;open(name[, mode[, buffering]])&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;name&quot;&gt;&lt;a href=&quot;#name&quot; class=&quot;headerlink&quot; title=&quot;name:&quot;&gt;&lt;/a&gt;name:&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;文件名, 是open函数唯一强制参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;mode&quot;&gt;&lt;a href=&quot;#mode&quot; class=&quot;headerlink&quot; title=&quot;mode:&quot;&gt;&lt;/a&gt;mode:&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;值&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;‘r’&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;读模式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘w’&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;写模式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘a’&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;追加模式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘b’&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;二进制模式(可以添加其他模式)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘+’&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;读/写模式(可以添加其他模式)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;em&gt;注: 在二进制模式下,不会转换如换行符等&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&quot;buffering&quot;&gt;&lt;a href=&quot;#buffering&quot; class=&quot;headerlink&quot; title=&quot;buffering:&quot;&gt;&lt;/a&gt;buffering:&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;0|False：I/O输入和输出是无缓冲的(读写操作直接针对磁盘)&lt;/li&gt;
+&lt;li&gt;1|True：I/O有缓冲,数据改动存在内存中,flush或close后才会更新磁盘的数据&lt;/li&gt;
+&lt;li&gt;大于1：代表缓冲区的大小&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;随机访问操作&quot;&gt;&lt;a href=&quot;#随机访问操作&quot; class=&quot;headerlink&quot; title=&quot;随机访问操作&quot;&gt;&lt;/a&gt;随机访问操作&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;seek(offset[, whence])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;tell()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;offset&quot;&gt;&lt;a href=&quot;#offset&quot; class=&quot;headerlink&quot; title=&quot;offset:&quot;&gt;&lt;/a&gt;offset:&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;偏移量, 表示一个字节(字符)数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;whence&quot;&gt;&lt;a href=&quot;#whence&quot; class=&quot;headerlink&quot; title=&quot;whence:&quot;&gt;&lt;/a&gt;whence:&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;默认为0：表示偏移量从文件开头开始计算的&lt;/li&gt;
+&lt;li&gt;值为1：表示相对于当前位置移动(此时offset可以为负数)&lt;/li&gt;
+&lt;li&gt;值为2：表示相对于文件结尾的移动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;tell&quot;&gt;&lt;a href=&quot;#tell&quot; class=&quot;headerlink&quot; title=&quot;tell:&quot;&gt;&lt;/a&gt;tell:&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;该方法返回当前文件的位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;watchdog-events-FileSystemEventHandler&quot;&gt;&lt;a href=&quot;#watchdog-events-FileSystemEventHandler&quot; class=&quot;headerlink&quot; title=&quot;watchdog.events.FileSystemEventHandler&quot;&gt;&lt;/a&gt;watchdog.events.FileSystemEventHandler&lt;/h3&gt;&lt;p&gt;基本文件系统事件处理程序&lt;br&gt;可以重载几种方法:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;on_any_event(event)：所有事务的处理程序&lt;/li&gt;
+&lt;li&gt;on_created(event)：文件或者目录被创建的时候调用&lt;/li&gt;
+&lt;li&gt;on_deleted(event)：文件或目录被删除的时候调用&lt;/li&gt;
+&lt;li&gt;on_modified(event)：文件或目录被修改的时候调用&lt;/li&gt;
+&lt;li&gt;on_moved(event)：文件或目录被移动或重命名时候调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;watchdog-observers-Observer&quot;&gt;&lt;a href=&quot;#watchdog-observers-Observer&quot; class=&quot;headerlink&quot; title=&quot;watchdog.observers.Observer&quot;&gt;&lt;/a&gt;watchdog.observers.Observer&lt;/h3&gt;&lt;p&gt;观察目录并给事件处理程序分配调用&lt;/p&gt;
+&lt;h2 id=&quot;watchdog案例&quot;&gt;&lt;a href=&quot;#watchdog案例&quot; class=&quot;headerlink&quot; title=&quot;watchdog案例&quot;&gt;&lt;/a&gt;watchdog案例&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;文件被删除时调用close()&lt;/li&gt;
+&lt;li&gt;文件被创建时获得self.fd和self.offset&lt;/li&gt;
+&lt;li&gt;文件被新增时打印出新增的内容&lt;/li&gt;
+&lt;li&gt;文件被重命名时先关闭原文件再打开新文件并赋值self.fd和self.offset&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;代码实现&quot;&gt;&lt;a href=&quot;#代码实现&quot; class=&quot;headerlink&quot; title=&quot;代码实现:&quot;&gt;&lt;/a&gt;代码实现:&lt;/h3&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;47&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;48&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;49&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;50&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;51&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;52&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;53&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;54&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;55&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;56&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;57&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;58&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;59&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;60&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;61&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;62&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;63&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;64&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;65&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;66&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;67&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;68&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;69&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;70&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;71&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; os &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; path&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; watchdog.events &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; FileSystemEventHandler&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; watchdog.observers &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; Observer&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Watcher&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(FileSystemEventHandler)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self, filename, matcher)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.filename = path.abspath(filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.matcher = matcher&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.observer = Observer()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.fd = &lt;span class=&quot;keyword&quot;&gt;None&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.offset = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; path.isfile(self.filename):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.fd = open(self.filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.offset = path.getsize(self.filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;on_deleted&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self, event)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; path.abspath(event.src_path) == self.filename:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;delete &amp;#123;filename&amp;#125;&#39;&lt;/span&gt;.format(filename=self.filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.fd.close()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;on_moved&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self, event)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; path.abspath(event.src_path) == self.filename:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;close &amp;#123;filename&amp;#125;&#39;&lt;/span&gt;.format(filename=self.filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.fd.close()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.filename = path.abspath(event.dest_path)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; path.isfile(self.filename):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;new file &amp;#123;filename&amp;#125;&#39;&lt;/span&gt;.format(filename=self.filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.fd = open(self.filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.offset = path.getsize(self.filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;on_modified&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self, event)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; path.abspath(event.src_path) == self.filename:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.fd.seek(self.offset, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            match = getattr(self.matcher, &lt;span class=&quot;string&quot;&gt;&#39;match&#39;&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;lambda&lt;/span&gt; x: &lt;span class=&quot;keyword&quot;&gt;False&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; line &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; self.fd:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                line = line.rstrip(&lt;span class=&quot;string&quot;&gt;&#39;\n&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; match(line):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    print(&lt;span class=&quot;string&quot;&gt;&#39;matched &amp;#123;0&amp;#125;&#39;&lt;/span&gt;.format(line))&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.offset = self.fd.tell()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;on_created&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self, event)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; path.abspath(event.src_path) == self.filename &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; path.isfile(self.filename):&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;create &amp;#123;filename&amp;#125;&#39;&lt;/span&gt;.format(filename=self.filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.fd = open(self.filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.offset = path.getsize(self.filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.observer.schedule(self, path.dirname(self.filename), recursive=&lt;span class=&quot;keyword&quot;&gt;False&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.observer.start()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.observer.join()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;stop&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        self.observer.stop()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; self.fd &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;None&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; self.fd.closed:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            self.fd.close()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; __name__ == &lt;span class=&quot;string&quot;&gt;&#39;__main__&#39;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; sys&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Matcher&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(self, line)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    w = Watcher(sys.argv[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;], Matcher())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        w.start()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;except&lt;/span&gt; KeyboardInterrupt:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        w.stop()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;watchdog是python的第三方库,利用操作系统的API来监控目标目录或者文件的变化, 在linux系统下,借用了inotify机制&lt;br&gt;参照observers/__init__.py&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Class&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;Platforms&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;Note&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Inotify&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Linux 2.6.13+&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;inotify(7) based observer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FSEvents&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Mac OS X&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;FSEvents based observer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Kqueue&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Mac OS X and BSD with kqueue(2)&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;kqueue(2) based observer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;WinApi&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;MS Windows&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Windows API-based observer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Polling&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;Any&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;fallback implementation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Lvs简介</title>
     <link href="http://yoursite.com/2016/04/14/lvs%E7%AE%80%E4%BB%8B/"/>
     <id>http://yoursite.com/2016/04/14/lvs简介/</id>
     <published>2016-04-14T05:10:28.000Z</published>
-    <updated>2016-04-14T10:44:21.000Z</updated>
+    <updated>2016-04-25T15:23:44.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;/p&gt;
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，由前端的负载均衡器将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;关于lvs-四层路由&quot;&gt;&lt;a href=&quot;#关于lvs-四层路由&quot; class=&quot;headerlink&quot; title=&quot;关于lvs(四层路由)&quot;&gt;&lt;/a&gt;关于lvs(四层路由)&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;1，lvs是工作在INPUT链上，根据ipvs定义的规则完成转发的应用&lt;br&gt;2，lvs由ipvsadm和ipvs组成，前者是生成规则，后则是生效规则&lt;br&gt;3，ipvs工作在netfilter框架上，根据目标请求的套接字上(包括端口的协议TCP/UDP)的转发&lt;br&gt;4，lvs仅依赖于ip,port等做判断，无法识别应用层内容&lt;br&gt;5，请求到达用户空间，每个请求的连接需要维持套接字文件，所以(haproxy，nginx)并发转发请求受到套件字文件个数的限定(65535)，而lvs不依赖套接字，所以获得更好的并发转发机制&lt;/p&gt;
+&lt;h2 id=&quot;关于lvs的特征&quot;&gt;&lt;a href=&quot;#关于lvs的特征&quot; class=&quot;headerlink&quot; title=&quot;关于lvs的特征&quot;&gt;&lt;/a&gt;关于lvs的特征&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;lvs由ipvsadm和ipvs组成，前者生成规则，后者生效规则&lt;br&gt;lvs是工作在INPUT链上，根据ipvs定义的规则完成转发&lt;br&gt;ipvs工作在netfilter框架上，根据目标请求的套接字上(包括端口的协议TCP/UDP)的转发&lt;br&gt;lvs仅依赖于ip，port等做判断，无法识别应用层内容&lt;br&gt;lvs不依赖套接字，所以获得更好的并发转发机制&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;lvs工作机制&quot;&gt;&lt;a href=&quot;#lvs工作机制&quot; class=&quot;headerlink&quot; title=&quot;lvs工作机制&quot;&gt;&lt;/a&gt;lvs工作机制&lt;/h2&gt;&lt;p&gt;前端调度器：Director&lt;br&gt;后端服务器：Real Server&lt;br&gt;VIP: Director接受用户请求的IP地址&lt;br&gt;DIP: Director转发报文给Real Server的IP地址&lt;br&gt;RIP: Real Server的IP地址&lt;br&gt;CIP: 客户端的IP地址&lt;br&gt;请求报文经过的IP：&lt;em&gt;CIP –&amp;gt; VIP –&amp;gt; DIP –&amp;gt; RIP&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;注:&lt;em&gt;到达用户空间的每个请求连接需要维持套接字文件，并发转发请求受到套件字文件个数的限定(65535)&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;lvs工作机制&quot;&gt;&lt;a href=&quot;#lvs工作机制&quot; class=&quot;headerlink&quot; title=&quot;lvs工作机制&quot;&gt;&lt;/a&gt;lvs工作机制&lt;/h2&gt;&lt;p&gt;前端调度器：Director&lt;br&gt;后端服务器：Real_Server&lt;br&gt;VIP: Director接受用户请求的IP地址, 该地址也需要在Real_Server上配置&lt;br&gt;DIP: Director转发报文给Real_Server的IP地址&lt;br&gt;RIP: Real_Server的IP地址&lt;br&gt;CIP: 客户端的IP地址&lt;br&gt;请求报文经过的IP：&lt;em&gt;CIP –&amp;gt; VIP –&amp;gt; DIP –&amp;gt; RIP&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&quot;lvs工作类型&quot;&gt;&lt;a href=&quot;#lvs工作类型&quot; class=&quot;headerlink&quot; title=&quot;lvs工作类型&quot;&gt;&lt;/a&gt;lvs工作类型&lt;/h2&gt;&lt;h4 id=&quot;NAT模型&quot;&gt;&lt;a href=&quot;#NAT模型&quot; class=&quot;headerlink&quot; title=&quot;NAT模型&quot;&gt;&lt;/a&gt;NAT模型&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;/images/lvs-nat.png&quot; alt=&quot;lvs-nat&quot;&gt;&lt;/p&gt;
 &lt;h4 id=&quot;特性：&quot;&gt;&lt;a href=&quot;#特性：&quot; class=&quot;headerlink&quot; title=&quot;特性：&quot;&gt;&lt;/a&gt;特性：&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;1，RS(real server)应该使用私有地址&lt;br&gt;2，RS的网关的必须指向DIP,RIP和DIP必须在同一网段内&lt;br&gt;3，&lt;strong&gt;请求和响应的报文都经过Director&lt;/strong&gt;(在高负载场景中Director会成为系统性能瓶颈）&lt;br&gt;4，支持端口映射&lt;br&gt;5，RS可以使用任意支持集群服务的OS&lt;/p&gt;
+&lt;p&gt;RS(real_server,以下简称RS)应该使用私有地址&lt;br&gt;RS的网关的必须指向DIP, RIP和DIP必须在同一网段内&lt;br&gt;&lt;strong&gt;请求和响应的报文都经过Director&lt;/strong&gt;&lt;br&gt;支持端口映射&lt;br&gt;RS可以使用任意支持集群服务的OS&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;注:&lt;em&gt;此模型下, 请求报文和响应报文都会经过Director, 所以在高负载场景中Director会成为系统性能瓶&lt;/em&gt;&lt;/p&gt;
 &lt;h4 id=&quot;DR模型&quot;&gt;&lt;a href=&quot;#DR模型&quot; class=&quot;headerlink&quot; title=&quot;DR模型&quot;&gt;&lt;/a&gt;DR模型&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;/images/lvs-dr.png&quot; alt=&quot;lvs-dr&quot;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;实线是请求过程，虚线是响应过程&lt;/li&gt;
 &lt;li&gt;黑色表示RIP，DIP，VIP都是共网地址&lt;/li&gt;
 &lt;li&gt;红色表示DIP，VIP是私有地址且在同一个网段&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;此模型下Director发给RS时没有改变目标IP&lt;/strong&gt;&lt;br&gt;需要解决的问题：&lt;em&gt;让前端路由将请求发往VIP时，只能是Dirctor上的VIP&lt;/em&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt; &lt;strong&gt;修改Linux内核参数，将RS上的VIP配置为lo接口的别名，限制Linux仅对对应接口的ARP请求做响应&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;此模型下Director发给RS时没有改变目标IP&lt;/strong&gt;&lt;br&gt;需要解决的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;让前端路由将请求发往VIP时，只能是Dirctor上的VIP&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;解决方法:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修改Linux内核参数，将RS上的VIP配置为lo接口的别名，限制Linux仅对对应接口的ARP请求做响应&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h4 id=&quot;特性：-1&quot;&gt;&lt;a href=&quot;#特性：-1&quot; class=&quot;headerlink&quot; title=&quot;特性：&quot;&gt;&lt;/a&gt;特性：&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;1，RS可以使用私有地址；但也可以使用公网地址，此时可以直接通过互联网连入RS以实现配监控等&lt;br&gt;2，RS的网关一定不能指向DIP&lt;br&gt;3，RS跟Dirctory要在同一物理网络内(不能由路由器分隔)&lt;br&gt;4，请求报文经过Directory，但响应报文一定不经过Director&lt;br&gt;5，不支持端口映射&lt;br&gt;6，RS可以使用大多数的操作系统&lt;br&gt;7，&lt;strong&gt;Dirctory上为了便于VIP流动性(keepalived高可用)，Directory应该还有一个自己的外网地址&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;RS可以使用私有地址；但也可以使用公网地址，此时可以直接通过互联网连入RS以实现配监控等&lt;br&gt;RS的网关一定不能指向DIP&lt;br&gt;RS跟Dirctory要在同一物理网络内(不能由路由器分隔)&lt;br&gt;请求报文经过Directory，但响应报文一定不经过Director&lt;br&gt;不支持端口映射&lt;br&gt;RS可以使用大多数的操作系统&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;注: &lt;em&gt;Dirctory上为了便于VIP流动性(keepalived高可用)，Directory应该还有一个自己的外网地址&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&quot;lvs调度算法&quot;&gt;&lt;a href=&quot;#lvs调度算法&quot; class=&quot;headerlink&quot; title=&quot;lvs调度算法&quot;&gt;&lt;/a&gt;lvs调度算法&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;静态方法：仅根据算法本身进行调度&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;rr: Round Robin&lt;/li&gt;
 &lt;li&gt;wrr: Weighted RR&lt;/li&gt;
 &lt;li&gt;sh: source hashing&lt;/li&gt;
 &lt;li&gt;dh: destination hashing&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;动态方法：根据算法及RS当前的负载状况&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;lc: Least Connection Overhead&lt;br&gt;[当前负载]=Active*256+Inactive  结果中，最小者胜出；&lt;/li&gt;
 &lt;li&gt;wlc: Weighted LC&lt;br&gt;[考虑权重]Overhead=(Active*256+Inactive)/weight&lt;/li&gt;
@@ -64,28 +232,27 @@
 &lt;li&gt;lblc: Locality-based Least Connection  &amp;lt;==&amp;gt; dh+lc&lt;/li&gt;
 &lt;li&gt;lblcr: Replicated and Locality-based Least Connection&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，前端有一个负载调度器，负载调度器能将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;/p&gt;
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;LVS是工作在四层的负载平衡调度解决方法，由前端的负载均衡器将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样&lt;/p&gt;
     
     </summary>
     
       <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
     
     
-      <category term="lvs" scheme="http://yoursite.com/tags/lvs/"/>
+      <category term="负载均衡" scheme="http://yoursite.com/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
     
   </entry>
   
   <entry>
-    <title>关于linux进程</title>
+    <title>关于Linux进程</title>
     <link href="http://yoursite.com/2016/04/13/%E5%85%B3%E4%BA%8Elinux%E8%BF%9B%E7%A8%8B/"/>
     <id>http://yoursite.com/2016/04/13/关于linux进程/</id>
     <published>2016-04-13T05:58:59.000Z</published>
-    <updated>2016-04-14T10:44:23.000Z</updated>
+    <updated>2016-04-25T15:24:14.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在Linux系统中,触发任何一个事件时,系统都会将’它’定义为一个process,并给与其PID,同时根据启动’它’的使用者和相关属性关系,给与PID一组有效的权限配置,而program通常为binary program，一般放置于存储媒体(磁盘等)中。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
