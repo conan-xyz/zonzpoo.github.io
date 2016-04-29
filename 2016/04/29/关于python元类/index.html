@@ -1,0 +1,733 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Conan_の空间" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="前言关于元类(metaclass)的一些说法:
+
+元类是类的类
+元类是用来控制如何创建类的
+
+本文例子参考廖雪峰官方网站">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于python元类">
+<meta property="og:url" content="http://zonzpoo.github.io/2016/04/29/关于python元类/index.html">
+<meta property="og:site_name" content="Conan_の空间">
+<meta property="og:description" content="前言关于元类(metaclass)的一些说法:
+
+元类是类的类
+元类是用来控制如何创建类的
+
+本文例子参考廖雪峰官方网站">
+<meta property="og:updated_time" content="2016-04-29T14:52:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于python元类">
+<meta name="twitter:description" content="前言关于元类(metaclass)的一些说法:
+
+元类是类的类
+元类是用来控制如何创建类的
+
+本文例子参考廖雪峰官方网站">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 关于python元类 | Conan_の空间 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ab31944d33b258d42a263a7c78b303a3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Conan_の空间</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于python元类
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-29T14:51:29+08:00" content="2016-04-29">
+              2016-04-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/29/关于python元类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/29/关于python元类/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/29/关于python元类/" class="leancloud_visitors" data-flag-title="关于python元类">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>关于元类(metaclass)的一些说法:</p>
+<ul>
+<li>元类是类的类</li>
+<li>元类是用来控制如何创建类的</li>
+</ul>
+<p>本文例子参考<a href="http://www.liaoxuefeng.com/" target="_blank" rel="external">廖雪峰官方网站</a></p>
+<a id="more"></a>
+<h2 id="内建元类type"><a href="#内建元类type" class="headerlink" title="内建元类type"></a>内建元类type</h2><p>type实际上是Python的一个内建元类，用来直接指导类的生成，用法如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(类名，父类的元祖，包含属性的字典)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; cls = type('classname'，(object，)，&#123;'attr':'hello world'&#125;)</span><br><span class="line">&gt;&gt;&gt; cls</span><br><span class="line">&lt;class '__main__.classname'&gt;</span><br><span class="line">&gt;&gt;&gt; cls_instance = cls()</span><br><span class="line">&gt;&gt;&gt; cls_instance</span><br><span class="line">&lt;__main__.classname object at 0x103ee1b50&gt;</span><br><span class="line">&gt;&gt;&gt; cls_instance.attr</span><br><span class="line">'hello world'</span><br></pre></td></tr></table></figure>
+<p><strong>注: 通过type()函数创建的类和直接写class是完全一样的，因为Python解释器遇到class定义时，仅仅是扫描一下class定义的语法，然后调用type()函数创建出class</strong></p>
+<h2 id="自定义metaclass"><a href="#自定义metaclass" class="headerlink" title="自定义metaclass"></a>自定义metaclass</h2><p>除了使用内建的元类type，也可以通过集成type来定义元类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>l = list()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l.append(<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>l</span><br><span class="line">[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>定义l为list的实例，并给l增加元素1，利用metaclass重新自定义类(MyList)创建的list增加add方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(s, value)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> s  <span class="comment"># MyList的实例</span></span><br><span class="line">    <span class="keyword">print</span> value  <span class="comment"># 传入的值</span></span><br><span class="line">    <span class="keyword">return</span> s.append(value)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListMetaclass</span><span class="params">(type)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, name, bases, dict)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> cls</span><br><span class="line">        <span class="keyword">print</span> name  <span class="comment"># 被生成的类的类名</span></span><br><span class="line">        <span class="keyword">print</span> bases  <span class="comment"># 被生成的类继承的父类集合</span></span><br><span class="line">        <span class="keyword">print</span> dict  <span class="comment"># 类的方法集合</span></span><br><span class="line">        dict[<span class="string">'add'</span>] = add  <span class="comment"># 增加add方法，默认第一个参数是生成的类的实例</span></span><br><span class="line">        <span class="keyword">return</span> super(ListMetaclass, cls).__new__(cls, name, bases, dict)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyList</span><span class="params">(list)</span>:</span></span><br><span class="line">    __metaclass__ = ListMetaclass</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">l = MyList()</span><br><span class="line">l.add(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">print</span> l</span><br></pre></td></tr></table></figure>
+<p>运行结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;class &apos;__main__.ListMetaclass&apos;&gt;</span><br><span class="line">MyList</span><br><span class="line">(&lt;type &apos;list&apos;&gt;,)</span><br><span class="line">&#123;&apos;__module__&apos;: &apos;__main__&apos;, &apos;__metaclass__&apos;: &lt;class &apos;__main__.ListMetaclass&apos;&gt;&#125;</span><br><span class="line">[]</span><br><span class="line">1</span><br><span class="line">[1]</span><br></pre></td></tr></table></figure></p>
+<h2 id="简单的ORM实现"><a href="#简单的ORM实现" class="headerlink" title="简单的ORM实现"></a>简单的ORM实现</h2><h3 id="定义Field基类及其他各种类型，负责保存数据库表的字段名和字段类型"><a href="#定义Field基类及其他各种类型，负责保存数据库表的字段名和字段类型" class="headerlink" title="定义Field基类及其他各种类型，负责保存数据库表的字段名和字段类型"></a>定义Field基类及其他各种类型，负责保存数据库表的字段名和字段类型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Field</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, type)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self._type = type</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&#123;0&#125;:&#123;1&#125;'</span>.format(self.__class__.__name__, self.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StringField</span><span class="params">(Field)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        super(StringField, self).__init__(name, <span class="string">'varchar(100)'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IntegerField</span><span class="params">(Field)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        super(IntegerField, self).__init__(name, <span class="string">'bigint'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="定义元类"><a href="#定义元类" class="headerlink" title="定义元类"></a>定义元类</h3><p>主要通过元类找到最后定义的model中的各个属性<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ModelMetaclass</span><span class="params">(type)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, name, bases, attrs)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> name == <span class="string">'Model'</span>:  <span class="comment"># 排除对Model类的修改</span></span><br><span class="line">            <span class="keyword">return</span> super(ModelMetaclass, cls).__new__(cls, name, bases, attrs)</span><br><span class="line"></span><br><span class="line">        print(<span class="string">'Found model: &#123;0&#125;'</span>.format(name))</span><br><span class="line"></span><br><span class="line">        mappings = dict()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> attrs.items():  <span class="comment"># 查找生成类的所有属性并保存到mappings</span></span><br><span class="line">            <span class="keyword">if</span> isinstance(v, Field):</span><br><span class="line">                print(<span class="string">'Found mapping: &#123;0&#125; ==&gt; &#123;1&#125;'</span>.format(k, v))</span><br><span class="line">                mappings[k] = v</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> mappings.keys():</span><br><span class="line">            attrs.pop(k)</span><br><span class="line"></span><br><span class="line">        attrs[<span class="string">'__mappings__'</span>] = mappings  <span class="comment"># 保存属性和列的映射关系</span></span><br><span class="line">        attrs[<span class="string">'__table__'</span>] = name  <span class="comment"># 假设表名和类名一致</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> super(ModelMetaclass, cls).__new__(cls, name, bases, attrs)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span><span class="params">(dict)</span>:</span></span><br><span class="line">    __metaclass__ = ModelMetaclass</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, **kw)</span>:</span></span><br><span class="line">        super(Model, self).__init__(**kw)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">save</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># print self</span></span><br><span class="line">        fields = []</span><br><span class="line">        params = []</span><br><span class="line">        args = []</span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> self.__mappings__.items():</span><br><span class="line">            fields.append(v.name)</span><br><span class="line">            params.append(<span class="string">'?'</span>)</span><br><span class="line">            args.append(getattr(self, k, <span class="keyword">None</span>))</span><br><span class="line">        sql = <span class="string">'insert into &#123;0&#125; &#123;1&#125; values &#123;2&#125;'</span>.format(self.__table__, <span class="string">','</span>.join(fields), <span class="string">','</span>.join(params))</span><br><span class="line">        print(<span class="string">'SQL: &#123;0&#125;'</span>.format(sql))</span><br><span class="line">        print(<span class="string">'ARGS: &#123;0&#125;'</span>.format(args))</span><br></pre></td></tr></table></figure></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(Model)</span>:</span></span><br><span class="line">    <span class="comment"># 定义类的属性到列的映射：</span></span><br><span class="line">    id = IntegerField(<span class="string">'id'</span>)</span><br><span class="line">    name = StringField(<span class="string">'username'</span>)</span><br><span class="line">    email = StringField(<span class="string">'email'</span>)</span><br><span class="line">    password = StringField(<span class="string">'password'</span>)</span><br><span class="line"></span><br><span class="line">创建一个实例：</span><br><span class="line">u = User()</span><br><span class="line">u.id = <span class="number">12345</span></span><br><span class="line">u.name = <span class="string">'Michael'</span></span><br><span class="line">u.email = <span class="string">'test@orm.org'</span></span><br><span class="line">u.password = <span class="string">'my-pwd'</span></span><br><span class="line"></span><br><span class="line">保存到数据库：</span><br><span class="line">u.save()</span><br></pre></td></tr></table></figure>
+<p>结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Found model: User</span><br><span class="line">Found mapping: email ==&gt; StringField:email</span><br><span class="line">Found mapping: password ==&gt; StringField:password</span><br><span class="line">Found mapping: id ==&gt; IntegerField:id</span><br><span class="line">Found mapping: name ==&gt; StringField:username</span><br><span class="line">SQL: insert into User password,email,username,id values ?,?,?,?</span><br><span class="line">ARGS: [&apos;my-pwd&apos;, &apos;test@orm.org&apos;, &apos;Michael&apos;, 12345]</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/27/python-built-in-objects/" rel="next" title="python built-in objects">
+                <i class="fa fa-chevron-left"></i> python built-in objects
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/29/关于python元类/"
+           data-title="关于python元类" data-url="http://zonzpoo.github.io/2016/04/29/关于python元类/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/conan.png"
+               alt="Conan_" />
+          <p class="site-author-name" itemprop="name">Conan_</p>
+          <p class="site-description motion-element" itemprop="description">devops之路</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内建元类type"><span class="nav-number">2.</span> <span class="nav-text">内建元类type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义metaclass"><span class="nav-number">3.</span> <span class="nav-text">自定义metaclass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的ORM实现"><span class="nav-number">4.</span> <span class="nav-text">简单的ORM实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义Field基类及其他各种类型，负责保存数据库表的字段名和字段类型"><span class="nav-number">4.1.</span> <span class="nav-text">定义Field基类及其他各种类型，负责保存数据库表的字段名和字段类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义元类"><span class="nav-number">4.2.</span> <span class="nav-text">定义元类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">4.3.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Conan_</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/vendors/jquery-scrollintoview/jquery.scrollintoview.min.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zonzpoo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("3mBmLn30Lw4qzMgGzU5IFLap-gzGzoHsz", "TM9gEiTnvVR8gKYMWmtv2r04");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

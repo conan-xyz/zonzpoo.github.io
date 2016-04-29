@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="负载均衡," />
+  <meta name="keywords" content="python," />
 
 
 
@@ -59,19 +59,16 @@
 
 
 
-<meta name="description" content="前言LVS是工作在四层的负载平衡调度解决方法，由前端的负载均衡器将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样">
+<meta name="description" content="前言python2.2后，在内建类和古典类之间引入了新式类(new-style classes). 在新式类中，object是所有内建类型的基类，用户所定义的类可以继承自object也可继承自内建类型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lvs简介">
-<meta property="og:url" content="http://zonzpoo.github.io/2016/04/14/lvs简介/index.html">
+<meta property="og:title" content="python built-in objects">
+<meta property="og:url" content="http://zonzpoo.github.io/2016/04/27/python-built-in-objects/index.html">
 <meta property="og:site_name" content="Conan_の空间">
-<meta property="og:description" content="前言LVS是工作在四层的负载平衡调度解决方法，由前端的负载均衡器将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样">
-<meta property="og:image" content="http://zonzpoo.github.io/images/lvs-nat.png">
-<meta property="og:image" content="http://zonzpoo.github.io/images/lvs-dr.png">
-<meta property="og:updated_time" content="2016-04-25T15:23:44.000Z">
+<meta property="og:description" content="前言python2.2后，在内建类和古典类之间引入了新式类(new-style classes). 在新式类中，object是所有内建类型的基类，用户所定义的类可以继承自object也可继承自内建类型">
+<meta property="og:updated_time" content="2016-04-28T02:25:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lvs简介">
-<meta name="twitter:description" content="前言LVS是工作在四层的负载平衡调度解决方法，由前端的负载均衡器将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样">
-<meta name="twitter:image" content="http://zonzpoo.github.io/images/lvs-nat.png">
+<meta name="twitter:title" content="python built-in objects">
+<meta name="twitter:description" content="前言python2.2后，在内建类和古典类之间引入了新式类(new-style classes). 在新式类中，object是所有内建类型的基类，用户所定义的类可以继承自object也可继承自内建类型">
 
 
 
@@ -89,7 +86,7 @@
   };
 </script>
 
-  <title> Lvs简介 | Conan_の空间 </title>
+  <title> python built-in objects | Conan_の空间 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -239,7 +236,7 @@
             
             
               
-                Lvs简介
+                python built-in objects
               
             
           </h1>
@@ -251,8 +248,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-14T13:10:28+08:00" content="2016-04-14">
-              2016-04-14
+            <time itemprop="dateCreated" datetime="2016-04-27T11:11:13+08:00" content="2016-04-27">
+              2016-04-27
             </time>
           </span>
 
@@ -265,8 +262,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -281,8 +278,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/14/lvs简介/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/lvs简介/" itemprop="commentsCount"></span>
+                <a href="/2016/04/27/python-built-in-objects/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/27/python-built-in-objects/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -292,7 +289,7 @@
 
           
           
-             <span id="/2016/04/14/lvs简介/" class="leancloud_visitors" data-flag-title="Lvs简介">
+             <span id="/2016/04/27/python-built-in-objects/" class="leancloud_visitors" data-flag-title="python built-in objects">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -313,51 +310,75 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>LVS是工作在四层的负载平衡调度解决方法，由前端的负载均衡器将请求调度到后端的服务器上，让整个服务器集群的结构对客户是透明的，而客户访问的集群系统提供的网络服务就像访问一台高性能的服务器一样</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>python2.2后，在内建类和古典类之间引入了新式类(new-style classes). 在新式类中，object是所有内建类型的基类，用户所定义的类可以继承自object也可继承自内建类型</p>
 <a id="more"></a>
-<h2 id="关于lvs的特征"><a href="#关于lvs的特征" class="headerlink" title="关于lvs的特征"></a>关于lvs的特征</h2><blockquote>
-<p>lvs由ipvsadm和ipvs组成，前者生成规则，后者生效规则<br>lvs是工作在INPUT链上，根据ipvs定义的规则完成转发<br>ipvs工作在netfilter框架上，根据目标请求的套接字上(包括端口的协议TCP/UDP)的转发<br>lvs仅依赖于ip，port等做判断，无法识别应用层内容<br>lvs不依赖套接字，所以获得更好的并发转发机制</p>
-</blockquote>
-<p>注:<em>到达用户空间的每个请求连接需要维持套接字文件，并发转发请求受到套件字文件个数的限定(65535)</em></p>
-<h2 id="lvs工作机制"><a href="#lvs工作机制" class="headerlink" title="lvs工作机制"></a>lvs工作机制</h2><p>前端调度器：Director<br>后端服务器：Real_Server<br>VIP: Director接受用户请求的IP地址, 该地址也需要在Real_Server上配置<br>DIP: Director转发报文给Real_Server的IP地址<br>RIP: Real_Server的IP地址<br>CIP: 客户端的IP地址<br>请求报文经过的IP：<em>CIP –&gt; VIP –&gt; DIP –&gt; RIP</em></p>
-<h2 id="lvs工作类型"><a href="#lvs工作类型" class="headerlink" title="lvs工作类型"></a>lvs工作类型</h2><h4 id="NAT模型"><a href="#NAT模型" class="headerlink" title="NAT模型"></a>NAT模型</h4><p><img src="/images/lvs-nat.png" alt="lvs-nat"></p>
-<h4 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h4><blockquote>
-<p>RS(real_server,以下简称RS)应该使用私有地址<br>RS的网关的必须指向DIP, RIP和DIP必须在同一网段内<br><strong>请求和响应的报文都经过Director</strong><br>支持端口映射<br>RS可以使用任意支持集群服务的OS</p>
-</blockquote>
-<p>注:<em>此模型下, 请求报文和响应报文都会经过Director, 所以在高负载场景中Director会成为系统性能瓶</em></p>
-<h4 id="DR模型"><a href="#DR模型" class="headerlink" title="DR模型"></a>DR模型</h4><p><img src="/images/lvs-dr.png" alt="lvs-dr"></p>
+<h2 id="内建类型，object，type和用户定义的类之前的关系"><a href="#内建类型，object，type和用户定义的类之前的关系" class="headerlink" title="内建类型，object，type和用户定义的类之前的关系"></a>内建类型，object，type和用户定义的类之前的关系</h2><h3 id="代码举例说明"><a href="#代码举例说明" class="headerlink" title="代码举例说明"></a>代码举例说明</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    古典类</span><br><span class="line">    '''</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    继承自object</span><br><span class="line">    '''</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(type)</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    type是个元类</span><br><span class="line">    '''</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(dict)</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    继承自dict</span><br><span class="line">    '''</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a, b, c, d = A(), B(), C(<span class="string">'F'</span>, (object,), &#123;<span class="string">'value'</span>: <span class="number">2</span>&#125;), D()</span><br></pre></td></tr></table></figure>
+<h3 id="求值结果"><a href="#求值结果" class="headerlink" title="求值结果"></a>求值结果</h3><table>
+<thead>
+<tr>
+<th>对象</th>
+<th style="text-align:left">type(*)</th>
+<th style="text-align:left">*.__class__</th>
+<th style="text-align:left">*.__bases__</th>
+<th style="text-align:left">isinstance(*,object)</th>
+<th style="text-align:left">isinstance(*,type)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td style="text-align:left">(type ‘type’)</td>
+<td style="text-align:left">(type ‘type’)</td>
+<td style="text-align:left">()</td>
+<td style="text-align:left">真</td>
+<td style="text-align:left">真</td>
+</tr>
+<tr>
+<td>type</td>
+<td style="text-align:left">(type ‘type’)</td>
+<td style="text-align:left">(type ‘type’)</td>
+<td style="text-align:left">(type ‘object’)</td>
+<td style="text-align:left">真</td>
+<td style="text-align:left">真</td>
+</tr>
+<tr>
+<td>a</td>
+<td style="text-align:left">(type ‘instance’)</td>
+<td style="text-align:left"><strong>main</strong>.A</td>
+<td style="text-align:left">()</td>
+<td style="text-align:left">真</td>
+<td style="text-align:left">假</td>
+</tr>
+<tr>
+<td>b</td>
+<td style="text-align:left">(class ‘__main__.B’)</td>
+<td style="text-align:left">(class ‘__main__.B’)</td>
+<td style="text-align:left">(type ‘object’)</td>
+<td style="text-align:left">真</td>
+<td style="text-align:left">假</td>
+</tr>
+<tr>
+<td>c</td>
+<td style="text-align:left">(class ‘__main__.F’)</td>
+<td style="text-align:left">(class ‘__main__.F’)</td>
+<td style="text-align:left">(type ‘type’)</td>
+<td style="text-align:left">真</td>
+<td style="text-align:left">真</td>
+</tr>
+<tr>
+<td>d</td>
+<td style="text-align:left">(class ‘__main__.D’)</td>
+<td style="text-align:left">(class ‘__main__.D’)</td>
+<td style="text-align:left">(type ‘dict’)</td>
+<td style="text-align:left">真</td>
+<td style="text-align:left">假</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>实线是请求过程，虚线是响应过程</li>
-<li>黑色表示RIP，DIP，VIP都是共网地址</li>
-<li>红色表示DIP，VIP是私有地址且在同一个网段</li>
-</ul>
-<p><strong>此模型下Director发给RS时没有改变目标IP</strong><br>需要解决的问题：</p>
-<ul>
-<li>让前端路由将请求发往VIP时，只能是Dirctor上的VIP</li>
-</ul>
-<p>解决方法:</p>
-<ul>
-<li>修改Linux内核参数，将RS上的VIP配置为lo接口的别名，限制Linux仅对对应接口的ARP请求做响应</li>
-</ul>
-<h4 id="特性：-1"><a href="#特性：-1" class="headerlink" title="特性："></a>特性：</h4><blockquote>
-<p>RS可以使用私有地址；但也可以使用公网地址，此时可以直接通过互联网连入RS以实现配监控等<br>RS的网关一定不能指向DIP<br>RS跟Dirctory要在同一物理网络内(不能由路由器分隔)<br>请求报文经过Directory，但响应报文一定不经过Director<br>不支持端口映射<br>RS可以使用大多数的操作系统</p>
-</blockquote>
-<p>注: <em>Dirctory上为了便于VIP流动性(keepalived高可用)，Directory应该还有一个自己的外网地址</em></p>
-<h2 id="lvs调度算法"><a href="#lvs调度算法" class="headerlink" title="lvs调度算法"></a>lvs调度算法</h2><p><strong>静态方法：仅根据算法本身进行调度</strong></p>
-<ul>
-<li>rr: Round Robin</li>
-<li>wrr: Weighted RR</li>
-<li>sh: source hashing</li>
-<li>dh: destination hashing</li>
-</ul>
-<p><strong>动态方法：根据算法及RS当前的负载状况</strong></p>
-<ul>
-<li>lc: Least Connection Overhead<br>[当前负载]=Active*256+Inactive  结果中，最小者胜出；</li>
-<li>wlc: Weighted LC<br>[考虑权重]Overhead=(Active*256+Inactive)/weight</li>
-<li>sed: Shortest Expect Delay [最小期望延迟]Overhead=(Active+1)*256/weight</li>
-<li>nq: Nerver Queue</li>
-<li>lblc: Locality-based Least Connection  &lt;==&gt; dh+lc</li>
-<li>lblcr: Replicated and Locality-based Least Connection</li>
+<li>object和a(古典类实例)无基类，type基类为object</li>
+<li>c是个类，类名为F，type是元类</li>
+<li>object和基于type构建的用户类都是type的实例</li>
 </ul>
 
       
@@ -373,7 +394,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/负载均衡/" rel="tag">#负载均衡</a>
+            <a href="/tags/python/" rel="tag">#python</a>
           
         </div>
       
@@ -382,16 +403,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/13/关于linux进程/" rel="next" title="关于Linux进程">
-                <i class="fa fa-chevron-left"></i> 关于Linux进程
+              <a href="/2016/04/25/watchdog模块/" rel="next" title="watchdog模块">
+                <i class="fa fa-chevron-left"></i> watchdog模块
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/25/watchdog模块/" rel="prev" title="watchdog模块">
-                watchdog模块 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/04/29/关于python元类/" rel="prev" title="关于python元类">
+                关于python元类 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -418,8 +439,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/14/lvs简介/"
-           data-title="Lvs简介" data-url="http://zonzpoo.github.io/2016/04/14/lvs简介/">
+      <div class="ds-thread" data-thread-key="2016/04/27/python-built-in-objects/"
+           data-title="python built-in objects" data-url="http://zonzpoo.github.io/2016/04/27/python-built-in-objects/">
       </div>
     
   </div>
@@ -519,7 +540,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于lvs的特征"><span class="nav-number">2.</span> <span class="nav-text">关于lvs的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lvs工作机制"><span class="nav-number">3.</span> <span class="nav-text">lvs工作机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lvs工作类型"><span class="nav-number">4.</span> <span class="nav-text">lvs工作类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NAT模型"><span class="nav-number">4.0.1.</span> <span class="nav-text">NAT模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特性："><span class="nav-number">4.0.2.</span> <span class="nav-text">特性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DR模型"><span class="nav-number">4.0.3.</span> <span class="nav-text">DR模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特性：-1"><span class="nav-number">4.0.4.</span> <span class="nav-text">特性：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lvs调度算法"><span class="nav-number">5.</span> <span class="nav-text">lvs调度算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内建类型，object，type和用户定义的类之前的关系"><span class="nav-number">2.</span> <span class="nav-text">内建类型，object，type和用户定义的类之前的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码举例说明"><span class="nav-number">2.1.</span> <span class="nav-text">代码举例说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#求值结果"><span class="nav-number">2.2.</span> <span class="nav-text">求值结果</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
