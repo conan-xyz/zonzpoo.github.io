@@ -41,12 +41,10 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ftp," />
 
 
 
-
-  
 
 
   <link rel="alternate" href="/atom.xml" title="Conan_の空间" type="application/atom+xml" />
@@ -61,16 +59,16 @@
 
 
 
-<meta name="description" content="devops之路">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://zonzpoo.github.io/categories/index.html">
+<meta name="description" content="前言vsftpd是Very_Secure_FTP的缩写，支持anonymous帐号登录和本地实体帐号登录，通过简单的配置，即可以运行。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置vsftpd遇到的一些问题">
+<meta property="og:url" content="http://zonzpoo.github.io/2016/05/08/配置vsftpd遇到的一些问题/index.html">
 <meta property="og:site_name" content="Conan_の空间">
-<meta property="og:description" content="devops之路">
-<meta property="og:updated_time" content="2016-04-06T13:28:58.000Z">
+<meta property="og:description" content="前言vsftpd是Very_Secure_FTP的缩写，支持anonymous帐号登录和本地实体帐号登录，通过简单的配置，即可以运行。">
+<meta property="og:updated_time" content="2016-05-29T06:35:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="devops之路">
+<meta name="twitter:title" content="配置vsftpd遇到的一些问题">
+<meta name="twitter:description" content="前言vsftpd是Very_Secure_FTP的缩写，支持anonymous帐号登录和本地实体帐号登录，通过简单的配置，即可以运行。">
 
 
 
@@ -88,13 +86,7 @@
   };
 </script>
 
-  <title>
-  
-
-  
-    分类 | Conan_の空间
-  
-</title>
+  <title> 配置vsftpd遇到的一些问题 | Conan_の空间 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -125,7 +117,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -225,16 +217,156 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="category-all-page">
-        <div class="category-all-title">
-            目前共计 2 个分类
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                配置vsftpd遇到的一些问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-08T00:12:47+08:00" content="2016-05-08">
+              2016-05-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/08/配置vsftpd遇到的一些问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/08/配置vsftpd遇到的一些问题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/08/配置vsftpd遇到的一些问题/" class="leancloud_visitors" data-flag-title="配置vsftpd遇到的一些问题">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
         </div>
-        <div class="category-all">
-          <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span></li></ul>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>vsftpd是Very_Secure_FTP的缩写，支持anonymous帐号登录和本地实体帐号登录，通过简单的配置，即可以运行。</p>
+<a id="more"></a>
+<h2 id="配置-debian系统"><a href="#配置-debian系统" class="headerlink" title="配置(debian系统)"></a>配置(debian系统)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">listen=YES</span><br><span class="line"></span><br><span class="line">anonymous_enable=NO</span><br><span class="line"></span><br><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br><span class="line">local_umask=022</span><br><span class="line"></span><br><span class="line">dirmessage_enable=YES</span><br><span class="line">use_localtime=YES</span><br><span class="line">xferlog_enable=YES</span><br><span class="line">xferlog_std_format=True</span><br><span class="line">xferlog_file=/var/log/vsftpd.log</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">data_connection_timeout=120</span><br><span class="line"></span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line"></span><br><span class="line">pasv_enable=YES</span><br><span class="line"></span><br><span class="line">userlist_enable=YES</span><br><span class="line">userlist_deny=NO</span><br><span class="line">userlist_file=/etc/vsftpd.userlist</span><br></pre></td></tr></table></figure>
+<p><strong>所有的参数可通过man vsftpd.conf查看</strong></p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ul>
+<li><p>通过配置userlist_enable，vsftpd会从userlist_file给定的文件内读取用户名，<br>此用户登陆ftp会被要求输入密码如果userlist_enable激活后，userlist_deny<br>如果被设置成NO，那些不在userlist_file里面的用户会被拒绝登陆</p>
+</li>
+<li><p>/etc/pam.d/下的文件vsftpd中配置的pam_shells.so会检查登陆的ftp用户是否<br>有合法的shell，所以需要确保设置的ftp用户的shell存在/etc/shells文件中</p>
+</li>
+<li><p>如果在配置文件启用chroot_local_user=YES，将本地用户禁锢在其家目录中，用户<br>在登陆ftp后会报错:500 OOPS: vsftpd: refusing to run with writable<br>root inside chroot()，此时需要启用allow_writeable_chroot，当在vsftpd3之前<br>的版本allow_writeable_chroot选项在配置文件是不可用(debian7默认为2.3.5-3版本)</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ftp/" rel="tag">#ftp</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/29/关于python元类/" rel="next" title="关于python元类">
+                <i class="fa fa-chevron-left"></i> 关于python元类
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -243,6 +375,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/08/配置vsftpd遇到的一些问题/"
+           data-title="配置vsftpd遇到的一些问题" data-url="http://zonzpoo.github.io/2016/05/08/配置vsftpd遇到的一些问题/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -262,8 +402,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/conan.png"
@@ -322,6 +471,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-debian系统"><span class="nav-number">2.</span> <span class="nav-text">配置(debian系统)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -406,6 +566,11 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/vendors/jquery-scrollintoview/jquery.scrollintoview.min.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
 
   
 
