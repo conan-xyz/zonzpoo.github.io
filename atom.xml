@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zonzpoo.github.io/"/>
-  <updated>2016-05-29T06:35:00.000Z</updated>
+  <updated>2016-05-29T07:24:46.000Z</updated>
   <id>http://zonzpoo.github.io/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>urlsafe_b64encode和urlsafe_b64decode的编解码</title>
+    <link href="http://zonzpoo.github.io/2016/05/29/urlsafe-b64encode%E5%92%8Curlsafe-b64decode%E7%9A%84%E7%BC%96%E8%A7%A3%E7%A0%81/"/>
+    <id>http://zonzpoo.github.io/2016/05/29/urlsafe-b64encode和urlsafe-b64decode的编解码/</id>
+    <published>2016-05-29T06:56:23.000Z</published>
+    <updated>2016-05-29T07:24:46.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;某些情况，比如需要将路径’/var/log/messages’作为ZooKeeper的znode创建，ZooKeeper采用了类似文件系统的结构，此时需要将路径进行编码传入&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;实现方法&quot;&gt;&lt;a href=&quot;#实现方法&quot; class=&quot;headerlink&quot; title=&quot;实现方法&quot;&gt;&lt;/a&gt;实现方法&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;以下测试代码环境是python3&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;encode和decode函数&quot;&gt;&lt;a href=&quot;#encode和decode函数&quot; class=&quot;headerlink&quot; title=&quot;encode和decode函数&quot;&gt;&lt;/a&gt;encode和decode函数&lt;/h3&gt;&lt;p&gt;python中，使用decode()和encode()来进行解码和编码&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;In [19]: s = &amp;apos;中文&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;In [20]: s1 = s.encode() &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;In [21]: s1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Out[21]: b&amp;apos;\xe4\xb8\xad\xe6\x96\x87&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;In [22]: s1.decode()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Out[22]: &amp;apos;中文&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;str.encode(encoding=”utf-8”, errors=”strict”) 默认使用’utf-8’进行编码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;urlsafe-b64encode和urlsafe-b64decode函数&quot;&gt;&lt;a href=&quot;#urlsafe-b64encode和urlsafe-b64decode函数&quot; class=&quot;headerlink&quot; title=&quot;urlsafe_b64encode和urlsafe_b64decode函数&quot;&gt;&lt;/a&gt;urlsafe_b64encode和urlsafe_b64decode函数&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;In [1]: from base64 import urlsafe_b64decode&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;In [2]: from base64 import urlsafe_b64encode&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;In [3]: filename=&amp;apos;/var/log/message&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;In [6]: urlsafe_b64encode(filename.encode())&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Out[6]: b&amp;apos;L3Zhci9sb2cvbWVzc2FnZQ==&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;In [8]: urlsafe_b64decode(b&amp;apos;L3Zhci9sb2cvbWVzc2FnZQ==&amp;apos;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Out[8]: b&amp;apos;/var/log/message&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;In [9]: (urlsafe_b64decode(b&amp;apos;L3Zhci9sb2cvbWVzc2FnZQ==&amp;apos;)).decode()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Out[9]: &amp;apos;/var/log/message&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;使用urlsafe_b64encode进行编码，Encode string s using a URL-safe alphabet, which substitutes - instead of + and __ instead of / in the standard Base64 alphabet. The result can still contain =.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;某些情况，比如需要将路径’/var/log/messages’作为ZooKeeper的znode创建，ZooKeeper采用了类似文件系统的结构，此时需要将路径进行编码传入&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://zonzpoo.github.io/categories/python/"/>
+    
+    
+      <category term="base64" scheme="http://zonzpoo.github.io/tags/base64/"/>
+    
+  </entry>
   
   <entry>
     <title>配置vsftpd遇到的一些问题</title>
@@ -54,7 +87,7 @@
     <link href="http://zonzpoo.github.io/2016/04/29/%E5%85%B3%E4%BA%8Epython%E5%85%83%E7%B1%BB/"/>
     <id>http://zonzpoo.github.io/2016/04/29/关于python元类/</id>
     <published>2016-04-29T06:51:29.000Z</published>
-    <updated>2016-04-29T14:52:39.000Z</updated>
+    <updated>2016-05-29T06:53:25.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;关于元类(metaclass)的一些说法:&lt;/p&gt;
 &lt;ul&gt;
@@ -91,7 +124,7 @@
       <category term="python" scheme="http://zonzpoo.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="http://zonzpoo.github.io/tags/python/"/>
+      <category term="metaclass" scheme="http://zonzpoo.github.io/tags/metaclass/"/>
     
   </entry>
   
@@ -100,7 +133,7 @@
     <link href="http://zonzpoo.github.io/2016/04/27/python-built-in-objects/"/>
     <id>http://zonzpoo.github.io/2016/04/27/python-built-in-objects/</id>
     <published>2016-04-27T03:11:13.000Z</published>
-    <updated>2016-04-28T02:25:58.000Z</updated>
+    <updated>2016-05-29T06:54:10.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;python2.2后，在内建类和古典类之间引入了新式类(new-style classes). 在新式类中，object是所有内建类型的基类，用户所定义的类可以继承自object也可继承自内建类型&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -183,7 +216,7 @@
       <category term="python" scheme="http://zonzpoo.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="http://zonzpoo.github.io/tags/python/"/>
+      <category term="class" scheme="http://zonzpoo.github.io/tags/class/"/>
     
   </entry>
   
@@ -192,7 +225,7 @@
     <link href="http://zonzpoo.github.io/2016/04/25/watchdog%E6%A8%A1%E5%9D%97/"/>
     <id>http://zonzpoo.github.io/2016/04/25/watchdog模块/</id>
     <published>2016-04-25T15:26:02.000Z</published>
-    <updated>2016-04-27T03:15:53.000Z</updated>
+    <updated>2016-05-29T06:54:10.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;watchdog是python的第三方库，利用操作系统的API来监控目标目录或者文件的变化， 在linux系统下，借用了inotify机制&lt;br&gt;参照observers/__init__.py&lt;/p&gt;
 &lt;table&gt;
@@ -347,7 +380,7 @@
       <category term="python" scheme="http://zonzpoo.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="http://zonzpoo.github.io/tags/python/"/>
+      <category term="watchdog" scheme="http://zonzpoo.github.io/tags/watchdog/"/>
     
   </entry>
   
