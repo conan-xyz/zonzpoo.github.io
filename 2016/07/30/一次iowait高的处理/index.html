@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ftp," />
+  <meta name="keywords" content="进程," />
 
 
 
@@ -59,16 +59,19 @@
 
 
 
-<meta name="description" content="前言vsftpd是Very_Secure_FTP的缩写，支持anonymous帐号登录和本地实体帐号登录，通过简单的配置，即可以运行。">
+<meta name="description" content="前言一次收到告警显示服务器CPU iowait time过大,一会又恢复了,大概每5分钟报警一次
+处理过程使用iotop查看磁盘IO操作1iotop -d 1 -obk -a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="配置vsftpd遇到的一些问题">
-<meta property="og:url" content="http://zonzpoo.github.io/2016/05/08/配置vsftpd遇到的一些问题/index.html">
+<meta property="og:title" content="一次iowait高的处理">
+<meta property="og:url" content="http://zonzpoo.github.io/2016/07/30/一次iowait高的处理/index.html">
 <meta property="og:site_name" content="Conan_の空间">
-<meta property="og:description" content="前言vsftpd是Very_Secure_FTP的缩写，支持anonymous帐号登录和本地实体帐号登录，通过简单的配置，即可以运行。">
-<meta property="og:updated_time" content="2016-05-29T06:35:00.000Z">
+<meta property="og:description" content="前言一次收到告警显示服务器CPU iowait time过大,一会又恢复了,大概每5分钟报警一次
+处理过程使用iotop查看磁盘IO操作1iotop -d 1 -obk -a">
+<meta property="og:updated_time" content="2016-07-30T07:29:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="配置vsftpd遇到的一些问题">
-<meta name="twitter:description" content="前言vsftpd是Very_Secure_FTP的缩写，支持anonymous帐号登录和本地实体帐号登录，通过简单的配置，即可以运行。">
+<meta name="twitter:title" content="一次iowait高的处理">
+<meta name="twitter:description" content="前言一次收到告警显示服务器CPU iowait time过大,一会又恢复了,大概每5分钟报警一次
+处理过程使用iotop查看磁盘IO操作1iotop -d 1 -obk -a">
 
 
 
@@ -86,7 +89,7 @@
   };
 </script>
 
-  <title> 配置vsftpd遇到的一些问题 | Conan_の空间 </title>
+  <title> 一次iowait高的处理 | Conan_の空间 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -236,7 +239,7 @@
             
             
               
-                配置vsftpd遇到的一些问题
+                一次iowait高的处理
               
             
           </h1>
@@ -248,8 +251,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-08T00:12:47+08:00" content="2016-05-08">
-              2016-05-08
+            <time itemprop="dateCreated" datetime="2016-07-30T14:50:25+08:00" content="2016-07-30">
+              2016-07-30
             </time>
           </span>
 
@@ -278,8 +281,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/08/配置vsftpd遇到的一些问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/08/配置vsftpd遇到的一些问题/" itemprop="commentsCount"></span>
+                <a href="/2016/07/30/一次iowait高的处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/30/一次iowait高的处理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -289,7 +292,7 @@
 
           
           
-             <span id="/2016/05/08/配置vsftpd遇到的一些问题/" class="leancloud_visitors" data-flag-title="配置vsftpd遇到的一些问题">
+             <span id="/2016/07/30/一次iowait高的处理/" class="leancloud_visitors" data-flag-title="一次iowait高的处理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -310,18 +313,17 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>vsftpd是Very_Secure_FTP的缩写，支持anonymous帐号登录和本地实体帐号登录，通过简单的配置，即可以运行。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一次收到告警显示服务器CPU iowait time过大,一会又恢复了,大概每5分钟报警一次</p>
+<h2 id="处理过程"><a href="#处理过程" class="headerlink" title="处理过程"></a>处理过程</h2><p>使用iotop查看磁盘IO操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iotop -d 1 -obk -a</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<h2 id="配置-debian系统"><a href="#配置-debian系统" class="headerlink" title="配置(debian系统)"></a>配置(debian系统)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">listen=YES</span><br><span class="line"></span><br><span class="line">anonymous_enable=NO</span><br><span class="line"></span><br><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br><span class="line">local_umask=022</span><br><span class="line"></span><br><span class="line">dirmessage_enable=YES</span><br><span class="line">use_localtime=YES</span><br><span class="line">xferlog_enable=YES</span><br><span class="line">xferlog_std_format=True</span><br><span class="line">xferlog_file=/var/log/vsftpd.log</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">data_connection_timeout=120</span><br><span class="line"></span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line"></span><br><span class="line">pasv_enable=YES</span><br><span class="line"></span><br><span class="line">userlist_enable=YES</span><br><span class="line">userlist_deny=NO</span><br><span class="line">userlist_file=/etc/vsftpd.userlist</span><br></pre></td></tr></table></figure>
-<p><strong>所有的参数可通过man vsftpd.conf查看</strong></p>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ul>
-<li><p>通过配置userlist_enable，vsftpd会从userlist_file给定的文件内读取用户名，<br>此用户登陆ftp会被要求输入密码如果userlist_enable激活后，userlist_deny<br>如果被设置成NO，那些不在userlist_file里面的用户会被拒绝登陆</p>
-</li>
-<li><p>/etc/pam.d/下的文件vsftpd中配置的pam_shells.so会检查登陆的ftp用户是否<br>有合法的shell，所以需要确保设置的ftp用户的shell存在/etc/shells文件中</p>
-</li>
-<li><p>如果在配置文件启用chroot_local_user=YES，将本地用户禁锢在其家目录中，用户<br>在登陆ftp后会报错:500 OOPS: vsftpd: refusing to run with writable<br>root inside chroot()，此时需要启用allow_writeable_chroot，当在vsftpd3之前<br>的版本allow_writeable_chroot选项在配置文件是不可用(debian7默认为2.3.5-3版本)</p>
-</li>
-</ul>
+<blockquote>
+<p>-d 表示刷新时间<br>-o 表示只显示当前有io操作的进程<br>-b 表示非交互模式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Actual DISK READ:       0.00 K/s | Actual DISK WRITE:       0.00 K/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND</span><br><span class="line">  120 be/3 root          0.00 K     24.00 K  0.00 %  0.23 % [jbd2/vda1-8]</span><br><span class="line"> 3107 be/4 root          0.00 K  40000.00 K  0.00 %  0.00 % redis-rdb-bgsave *:6379    .</span><br><span class="line">11183 be/4 root          0.00 K      4.00 K  0.00 %  0.00 % redis-server *:6379</span><br><span class="line">Total DISK READ :       0.00 K/s | Total DISK WRITE :   44605.33 K/s</span><br><span class="line">Actual DISK READ:       0.00 K/s | Actual DISK WRITE:       0.00 K/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND</span><br><span class="line">  120 be/3 root          0.00 K     24.00 K  0.00 %  0.20 % [jbd2/vda1-8]</span><br><span class="line"> 3107 be/4 root          0.00 K  85000.00 K  0.00 %  0.00 % redis-rdb-bgsave *:6379    .</span><br><span class="line">11183 be/4 root          0.00 K      4.00 K  0.00 %  0.00 % redis-server *:6379</span><br><span class="line">Total DISK READ :       0.00 K/s | Total DISK WRITE :   48190.76 K/s</span><br><span class="line">Actual DISK READ:       0.00 K/s | Actual DISK WRITE:       0.00 K/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND</span><br><span class="line">  120 be/3 root          0.00 K     24.00 K  0.00 %  0.18 % [jbd2/vda1-8]</span><br><span class="line"> 3107 be/4 root          0.00 K 133600.00 K  0.00 %  0.00 % redis-rdb-bgsave *:6379    .</span><br><span class="line">11183 be/4 root          0.00 K      4.00 K  0.00 %  0.00 % redis-server *:6379</span><br></pre></td></tr></table></figure>
+<p>可以看到有io操作的进程pid<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ls -l /proc/11183/fd/</span><br><span class="line">...</span><br><span class="line">lrwx------ 1 root root 64 Jul 30 13:06 35 -&gt; socket:[1069353]</span><br><span class="line">l-wx------ 1 root root 64 Jul 30 13:06 4 -&gt; /data/redis-6379/temp-3107.rdb</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>推断正在redis-server正在bgsave持久化,查看redis的log</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">11183:M 30 Jul 12:56:49.486 * 10000 changes in 60 seconds. Saving...</span><br><span class="line">11183:M 30 Jul 12:56:49.566 * Background saving started by pid 24361</span><br><span class="line">24361:C 30 Jul 12:58:00.946 * DB saved on disk</span><br><span class="line">24361:C 30 Jul 12:58:01.008 * RDB: 25 MB of memory used by copy-on-write</span><br><span class="line">11183:M 30 Jul 12:58:01.105 * Background saving terminated with success</span><br><span class="line">11183:M 30 Jul 12:59:19.571 * 10000 changes in 60 seconds. Saving...</span><br><span class="line">11183:M 30 Jul 12:59:19.638 * Background saving started by pid 27185</span><br><span class="line">27185:C 30 Jul 13:00:28.508 * DB saved on disk</span><br><span class="line">27185:C 30 Jul 13:00:28.554 * RDB: 24 MB of memory used by copy-on-write</span><br><span class="line">11183:M 30 Jul 13:00:28.678 * Background saving terminated with success</span><br><span class="line">11183:M 30 Jul 13:01:47.746 * 10000 changes in 60 seconds. Saving...</span><br><span class="line">11183:M 30 Jul 13:01:47.826 * Background saving started by pid 29767</span><br><span class="line">29767:C 30 Jul 13:02:58.917 * DB saved on disk</span><br></pre></td></tr></table></figure>
+<p>可以看到,数据更新过快,数量(changes)达到save参数指定的10000个,频繁触发save流程,由此推断可能前一次save未完成又需要新的save,造成iowait高<br>至此热调整线上redis的save的保存策略<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONFIG SET save &quot;900 1 300 10 60 20000&quot;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -336,7 +338,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ftp/" rel="tag">#ftp</a>
+            <a href="/tags/进程/" rel="tag">#进程</a>
           
         </div>
       
@@ -345,17 +347,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/29/关于python元类/" rel="next" title="关于python元类">
-                <i class="fa fa-chevron-left"></i> 关于python元类
+              <a href="/2016/05/29/urlsafe-b64encode和urlsafe-b64decode的编解码/" rel="next" title="urlsafe_b64encode和urlsafe_b64decode的编解码">
+                <i class="fa fa-chevron-left"></i> urlsafe_b64encode和urlsafe_b64decode的编解码
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/29/urlsafe-b64encode和urlsafe-b64decode的编解码/" rel="prev" title="urlsafe_b64encode和urlsafe_b64decode的编解码">
-                urlsafe_b64encode和urlsafe_b64decode的编解码 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -381,8 +379,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/08/配置vsftpd遇到的一些问题/"
-           data-title="配置vsftpd遇到的一些问题" data-url="http://zonzpoo.github.io/2016/05/08/配置vsftpd遇到的一些问题/">
+      <div class="ds-thread" data-thread-key="2016/07/30/一次iowait高的处理/"
+           data-title="一次iowait高的处理" data-url="http://zonzpoo.github.io/2016/07/30/一次iowait高的处理/">
       </div>
     
   </div>
@@ -482,7 +480,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-debian系统"><span class="nav-number">2.</span> <span class="nav-text">配置(debian系统)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理过程"><span class="nav-number">2.</span> <span class="nav-text">处理过程</span></a></li></ol></div>
             
           </div>
         </section>
