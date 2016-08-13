@@ -65,10 +65,12 @@
 <meta property="og:url" content="http://zonzpoo.github.io/2016/04/27/python-built-in-objects/index.html">
 <meta property="og:site_name" content="Conan_の空间">
 <meta property="og:description" content="前言python2.2后，在内建类和古典类之间引入了新式类(new-style classes). 在新式类中，object是所有内建类型的基类，用户所定义的类可以继承自object也可继承自内建类型">
-<meta property="og:updated_time" content="2016-05-29T06:54:10.000Z">
+<meta property="og:image" content="http://zonzpoo.github.io/images/takephoto1.jpg">
+<meta property="og:updated_time" content="2016-08-13T15:41:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python built-in objects">
 <meta name="twitter:description" content="前言python2.2后，在内建类和古典类之间引入了新式类(new-style classes). 在新式类中，object是所有内建类型的基类，用户所定义的类可以继承自object也可继承自内建类型">
+<meta name="twitter:image" content="http://zonzpoo.github.io/images/takephoto1.jpg">
 
 
 
@@ -106,6 +108,15 @@
   </script>
 
 
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=57923560";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -310,7 +321,8 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>python2.2后，在内建类和古典类之间引入了新式类(new-style classes). 在新式类中，object是所有内建类型的基类，用户所定义的类可以继承自object也可继承自内建类型</p>
+        <p><img src="/images/takephoto1.jpg" alt="takephoto1"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>python2.2后，在内建类和古典类之间引入了新式类(new-style classes). 在新式类中，object是所有内建类型的基类，用户所定义的类可以继承自object也可继承自内建类型</p>
 <a id="more"></a>
 <h2 id="内建类型，object，type和用户定义的类之前的关系"><a href="#内建类型，object，type和用户定义的类之前的关系" class="headerlink" title="内建类型，object，type和用户定义的类之前的关系"></a>内建类型，object，type和用户定义的类之前的关系</h2><h3 id="代码举例说明"><a href="#代码举例说明" class="headerlink" title="代码举例说明"></a>代码举例说明</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    古典类</span><br><span class="line">    '''</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    继承自object</span><br><span class="line">    '''</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(type)</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    type是个元类</span><br><span class="line">    '''</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(dict)</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    继承自dict</span><br><span class="line">    '''</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a, b, c, d = A(), B(), C(<span class="string">'F'</span>, (object,), &#123;<span class="string">'value'</span>: <span class="number">2</span>&#125;), D()</span><br></pre></td></tr></table></figure>
 <h3 id="求值结果"><a href="#求值结果" class="headerlink" title="求值结果"></a>求值结果</h3><table>
@@ -428,12 +440,38 @@
 
     <div class="post-spread">
       
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
     </div>
   </div>
 
 
           </div>
           
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
 
 
           
@@ -485,7 +523,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -502,7 +540,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
