@@ -247,6 +247,141 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/27/python魔术方法/" itemprop="url">
+                  python的魔术方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-27T23:15:25+08:00" content="2016-08-27">
+              2016-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/27/python魔术方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/python魔术方法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/27/python魔术方法/" class="leancloud_visitors" data-flag-title="python的魔术方法">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/church1.jpg" alt="photos"></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>内置方法与对象的特殊方法(以下代码的运行环境为python3)</p>
+<h2 id="add-和-sub"><a href="#add-和-sub" class="headerlink" title="__add__  和  __sub__"></a>__add__  和  __sub__</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self._x = x</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        print(<span class="string">"add"</span>)</span><br><span class="line">        <span class="keyword">return</span> Complex(self._x + other._x)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__sub__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        print(<span class="string">"sub"</span>)</span><br><span class="line">        <span class="keyword">return</span> Complex(self._x - other._x)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._x</span><br><span class="line"></span><br><span class="line">a = Complex(<span class="number">3</span>)</span><br><span class="line">b = Complex(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">c = a + b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>add    <span class="comment"># 调用__add__,打印出"add"</span></span><br><span class="line"></span><br><span class="line">c.print()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">4</span></span><br><span class="line"></span><br><span class="line">d = a - b</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sub    <span class="comment"># 调用__sub__,打印出"sub"</span></span><br><span class="line"></span><br><span class="line">d.print()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h2 id="bool-和-len"><a href="#bool-和-len" class="headerlink" title="__bool__ 和 __len__"></a>__bool__ 和 __len__</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__bool__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'bool'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">c = Complex()</span><br><span class="line"></span><br><span class="line">bool(c)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bool   <span class="comment"># 调用__bool__,打印出"bool"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'len'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">x = Complex()</span><br><span class="line"></span><br><span class="line">len(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len   <span class="comment"># 调用__len__,打印出"len"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">0</span></span><br><span class="line"></span><br><span class="line">bool(x)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len   <span class="comment"># 注意对实例调用bool,如果没有定义__bool__方法,会自动调用__len__方法</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">False</span></span><br></pre></td></tr></table></figure>
+<h2 id="call"><a href="#call" class="headerlink" title="__call__"></a>__call__</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 简单使用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self._x = x</span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"bili"</span>)</span><br><span class="line">        <span class="keyword">return</span> self._x</span><br><span class="line"></span><br><span class="line">c = Complex(<span class="string">"drink"</span>)</span><br><span class="line"></span><br><span class="line">c()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bili   <span class="comment"># 调用__call__,打印出"bili"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'drink'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 类装饰器使用(定义一个单例类)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cls)</span>:</span></span><br><span class="line">        self.cls = cls</span><br><span class="line">        self.instance = <span class="keyword">None</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, *args, **kwargs)</span>:</span></span><br><span class="line">        print(self.instance)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.instance:</span><br><span class="line">            self.instance = self.cls(*args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> self.instance</span><br><span class="line"></span><br><span class="line"><span class="meta">@Singleton</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="comment"># NewA = Singleton(A)     </span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">a1 = A()   <span class="comment"># a1 = NewA(), 注意此时A相当于Singleton初始化传入A后的实例</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">None</span>   <span class="comment"># 调用__call__,打印出"self.instance",此时为None</span></span><br><span class="line"></span><br><span class="line">a2 = A()   <span class="comment"># a2 = NewA()</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;__main__.A object at <span class="number">0x106ac3b38</span>&gt;   <span class="comment"># 调用__call__,打印出"self.instance",此时为a1</span></span><br><span class="line"></span><br><span class="line">a1 == a2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">True</span>   <span class="comment"># a1 = a2, 实际上第二次实例化的时候直接返回的第一次的实例</span></span><br></pre></td></tr></table></figure>
+<h2 id="str-和-repr"><a href="#str-和-repr" class="headerlink" title="__str__  和  __repr__"></a>__str__  和  __repr__</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x, y)</span>:</span></span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Complex(self.x + other.x, self.y + other.y)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"柯南"</span>)</span><br><span class="line">        <span class="keyword">if</span> self.x &gt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'&#123;0&#125; + &#123;1&#125;i'</span>.format(self.x, self.y)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&#123;0&#125; - &#123;1&#125;i'</span>.format(self.x, self.y)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># __repr__ = __str__</span></span><br><span class="line"></span><br><span class="line">c = Complex(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">str(c) / print(c)  <span class="comment"># print方法调用__str__</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>柯南    <span class="comment"># 调用__str__,打印出"柯南"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'1 + 2i'</span>  </span><br><span class="line"></span><br><span class="line">c</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;__main__.Complex at <span class="number">0x106ac3ef0</span>&gt;  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 去掉__repr__ = __str__前的注释符号</span></span><br><span class="line">c</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'1 + 2i'</span>  <span class="comment"># 直接输入c实际上会调用__repr__方法</span></span><br></pre></td></tr></table></figure>
+<h2 id="enter-exit-with语法"><a href="#enter-exit-with语法" class="headerlink" title="__enter__, __exit__(with语法)"></a>__enter__, __exit__(with语法)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self._x = x</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"starting"</span>)</span><br><span class="line">        <span class="keyword">return</span> self._x</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self, exc_type, exc_val, exc_tb)</span>:</span></span><br><span class="line">        print(exc_type, exc_val, exc_tb)</span><br><span class="line">        print(<span class="string">"ending"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> Complex(<span class="number">1</span>) <span class="keyword">as</span> x:</span><br><span class="line">    print(x)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>starting     <span class="comment"># 进入__enter__</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span>            <span class="comment"># print 打印出 self._x</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">None</span> <span class="keyword">None</span> <span class="keyword">None</span>   </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ending    <span class="comment"># 进入__exit__, print 打印出 ending</span></span><br></pre></td></tr></table></figure>
+<h2 id="contextlib-contextmanager功能简单实现"><a href="#contextlib-contextmanager功能简单实现" class="headerlink" title="contextlib.contextmanager功能简单实现"></a>contextlib.contextmanager功能简单实现</h2><h3 id="contextlib-contextmanager"><a href="#contextlib-contextmanager" class="headerlink" title="contextlib.contextmanager"></a>contextlib.contextmanager</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> contextmanager</span><br><span class="line"></span><br><span class="line"><span class="meta">@contextmanager</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">123</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        print(<span class="string">'exit'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> test() <span class="keyword">as</span> t:</span><br><span class="line">    print(t)</span><br><span class="line">  </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">123</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>exit</span><br></pre></td></tr></table></figure>
+<h3 id="简单实现方法1"><a href="#简单实现方法1" class="headerlink" title="简单实现方法1"></a>简单实现方法1</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, fn, *args, **kwargs)</span>:</span></span><br><span class="line">        self._fn = fn(*args, **kwargs)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> next(self._fn)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self, exc_type, exc_val, exc_tb)</span>:</span></span><br><span class="line">        print(exc_type, exc_val, exc_tb)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">manager</span><span class="params">(fn)</span>:</span></span><br><span class="line"><span class="meta">    @wraps(fn)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrap</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Manager(fn, *args, **kwargs)</span><br><span class="line">    <span class="keyword">return</span> wrap</span><br><span class="line"></span><br><span class="line"><span class="meta">@manager</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">123</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        print(<span class="string">'exit'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="简单实现方法2"><a href="#简单实现方法2" class="headerlink" title="简单实现方法2"></a>简单实现方法2</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ContextManager</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, fn, *args, **kwargs)</span>:</span></span><br><span class="line">        self._fn = fn(*args, **kwargs)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> next(self._fn)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self, exc_type, exc_val, exc_tb)</span>:</span></span><br><span class="line">        print(exc_type, exc_val, exc_tb)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span>:</span></span><br><span class="line">    <span class="string">'''</span><br><span class="line">    def manager(fn)</span><br><span class="line">      @wraps(fn)</span><br><span class="line">      def newtest(*args, **kwargs):</span><br><span class="line">          return fn(*args, **kwargs)</span><br><span class="line">      return newtest</span><br><span class="line">    '''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, fn)</span>:</span></span><br><span class="line">        wraps(fn)(self)    </span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, *args, **kwargs)</span>:</span>  <span class="comment"># 此处 fn == self.__wrapped__</span></span><br><span class="line">        <span class="keyword">return</span> ContextManager(self.__wrapped__, *args, **kwargs)</span><br><span class="line">    </span><br><span class="line"><span class="meta">@Manager</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span>      <span class="comment"># newtest = Manager(test)</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">123</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        print(<span class="string">'exit'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> test() <span class="keyword">as</span> t:</span><br><span class="line">    print(t)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">123</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">None</span> <span class="keyword">None</span> <span class="keyword">None</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>exit</span><br></pre></td></tr></table></figure>
+<h2 id="getattribute-getattr"><a href="#getattribute-getattr" class="headerlink" title="__getattribute__, __getattr__"></a>__getattribute__, __getattr__</h2><p>stackoverflow关于[<strong>getattribute</strong>和<strong>getattr</strong>]的区别回答:<br>(<a href="http://stackoverflow.com/questions/3278077/difference-between-getattr-vs-getattribute" target="_blank" rel="external">http://stackoverflow.com/questions/3278077/difference-between-getattr-vs-getattribute</a>)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.test = <span class="string">"init test"</span></span><br><span class="line">        self.test2 = <span class="string">"init test2"</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattribute__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> name == <span class="string">'test'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"getattribute test"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> object.__getattribute__(self, name)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> name == <span class="string">'test'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"getattr test"</span></span><br><span class="line">        <span class="keyword">if</span> name == <span class="string">'test3'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"getattr test3"</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">lambda</span>: <span class="string">"default test for &#123;0&#125;"</span>.format(name)</span><br><span class="line"></span><br><span class="line">d = D()</span><br><span class="line">d.test</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'getattribute test'</span>   <span class="comment"># 默认调用__getattribute__</span></span><br><span class="line">d.test2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'init test2'</span>          <span class="comment"># 返回object.__getattribute__(self, name)</span></span><br><span class="line">d.test3</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'getattr test3'</span>       <span class="comment"># 实例没有test3属性，调用__getattr__</span></span><br><span class="line">d.test4()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'default test for test4'</span>   <span class="comment"># __getattr__没有匹配到test4，返回匿名函数</span></span><br></pre></td></tr></table></figure>
+<h2 id="get-set-描述符"><a href="#get-set-描述符" class="headerlink" title="__get__, __set__(描述符)"></a>__get__, __set__(描述符)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 描述符对Propety的实现</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Propety</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, fget=None, fset=None, fdel=None)</span>:</span></span><br><span class="line">        self._fget = fget</span><br><span class="line">        self._fset = fset</span><br><span class="line">        self._fdel = fdel</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__get__</span><span class="params">(self, ins, cls)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> ins:</span><br><span class="line">            <span class="keyword">return</span> self</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> callable(self._fget):</span><br><span class="line">            <span class="keyword">raise</span> </span><br><span class="line">        <span class="keyword">return</span> self._fget(ins)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__set__</span><span class="params">(self, ins, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> ins:</span><br><span class="line">            <span class="keyword">return</span> self</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> callable(self._fset):</span><br><span class="line">            <span class="keyword">raise</span></span><br><span class="line">        <span class="keyword">return</span> self._fset(ins, value)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__delete__</span><span class="params">(self, ins)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> callable(self._fdel):</span><br><span class="line">            <span class="keyword">raise</span> </span><br><span class="line">        self._fdel(ins)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setter</span><span class="params">(self, fset)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Propety(self._fget, fset, self._fdel)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deleter</span><span class="params">(self, fdel)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> Propety(self._fget, self._fset, fdel)</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self._x = x</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @Propety             # Propety(p, None, None)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">p</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> self._x</span><br><span class="line">        <span class="keyword">except</span> AttributeError:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"AttributeError"</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @p.setter            # Propety(p, sp, None) 方便区分,此处p命名为sp</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sp</span><span class="params">(self, value)</span>:</span>   </span><br><span class="line">        self._x = value</span><br><span class="line">        </span><br><span class="line"><span class="meta">    @p.deleter           # Propety(p, None, dp) 方便区分,此处p命名为dp</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dp</span><span class="params">(self)</span>:</span> </span><br><span class="line">        <span class="keyword">del</span> self._x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = A(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.p         <span class="comment"># =&gt; Propety(p, None, None).__get__(a, A) =&gt; self._x</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.sp = <span class="number">3</span>    <span class="comment"># =&gt; Propety(p, sp, None).__set__(a) =&gt; self._x = 3</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.p   </span><br><span class="line"><span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> a.dp    <span class="comment"># =&gt; Propety(p, None, dp).__delete__(a, 3) =&gt; del self._x</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.p</span><br><span class="line"><span class="string">'AttributeError'</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/13/pycharm快捷键记录/" itemprop="url">
                   pycharm快捷键记录
                 </a>
@@ -832,7 +967,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg" rel="gallery_cirtdche00009kyso9phx8m2s"
+                 href="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg" rel="gallery_cishnht17000c8hso392wx04p"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://bruce.u.qiniudn.com/2013/11/27/reading/photos-1.jpg" itemprop="contentUrl"/>
               </a>
@@ -1420,135 +1555,13 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/06/关于Linux文件系统/" itemprop="url">
-                  关于Linux文件系统
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-06T21:03:32+08:00" content="2016-04-06">
-              2016-04-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/06/关于Linux文件系统/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/06/关于Linux文件系统/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/06/关于Linux文件系统/" class="leancloud_visitors" data-flag-title="关于Linux文件系统">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>文件系统是在内核中实现，能够对存储在磁盘上的二进制数据进行有效的层次化管理的一种软件。而用户程序为了实现在磁盘上使用或者创建文件，向内核发起系统调用(实际由文件系统向内核发起的系统调用)并转换为对应磁盘设备的电气信号的请求(数据存储在硬盘上,用户的”0,1”代码信号数据转换成磁盘能识别的存储机制)。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/06/关于Linux文件系统/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1587,7 +1600,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1604,7 +1617,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
